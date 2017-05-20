@@ -1,0 +1,9 @@
+{
+    "name": "superv/supreme-module",
+    "type": "superv-droplet",
+    "autoload": {
+        "psr-4": {
+            "SuperV\\Modules\\Supreme\\": "src/"
+        }
+    }
+}
