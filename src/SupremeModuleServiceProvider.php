@@ -1,6 +1,7 @@
 <?php namespace SuperV\Modules\Supreme;
 
 use SuperV\Modules\Supreme\Console\MakeService;
+use SuperV\Modules\Supreme\Domains\Server\Model\ServerComposer;
 use SuperV\Platform\Domains\Droplet\DropletServiceProvider;
 
 class SupremeModuleServiceProvider extends DropletServiceProvider
@@ -10,6 +11,7 @@ class SupremeModuleServiceProvider extends DropletServiceProvider
     ];
 
     protected $features = [
+        'SuperV\Modules\Supreme\Feature\InstallService',
         'SuperV\Modules\Supreme\Feature\CreateServer',
         'SuperV\Modules\Supreme\Feature\CreateService',
         'SuperV\Modules\Supreme\Feature\CreateAccount',

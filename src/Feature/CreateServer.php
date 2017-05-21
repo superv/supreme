@@ -13,12 +13,23 @@ class CreateServer extends Feature
         'account' => Accounts::class . "->id",
     ];
 
-    public function handle(Servers $servers)
+    public function handle(Servers $servers, Services $services)
     {
         $attrs = $this->request->only(['name', 'slug', 'ip', 'port']);
-        $attrs['account_id'] = $this->request->account;
+        $attrs['account_id'] = $this->request->get('account');
 
+        /** @var \SuperV\Modules\Supreme\Domains\Server\Model\ServerModel $server */
         $server = $servers->create($attrs);
+        if ($serviceList = $this->request->get('services')) {
+            if (!is_array($serviceList)) {
+                throw new \InvalidArgumentException('services must be array');
+            }
+            foreach ($serviceList as $slug) {
+                if ($service = $services->withSlug($slug)) {
+                    $server->services()->attach($service->id);
+                }
+            }
+        }
 
         return ['id' => $server->id];
     }

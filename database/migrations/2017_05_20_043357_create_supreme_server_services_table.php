@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateSupremeServerServicesTable extends Migration
 {
@@ -15,10 +15,19 @@ class CreateSupremeServerServicesTable extends Migration
     {
         Schema::create('supreme_server_services', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('server_id');
-            $table->integer('services_id');
+            $table->unsignedInteger('server_id');
+            $table->unsignedInteger('services_id');
             $table->nullableTimestamps();
 
+            $table->foreign('server_id')
+                  ->references('id')
+                  ->on('supreme_servers')
+                  ->onDelete('cascade');
+
+            $table->foreign('services_id')
+                  ->references('id')
+                  ->on('supreme_services')
+                  ->onDelete('cascade');
         });
     }
 

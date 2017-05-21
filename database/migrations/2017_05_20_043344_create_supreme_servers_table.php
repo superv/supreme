@@ -15,7 +15,7 @@ class CreateSupremeServersTable extends Migration
     {
         Schema::create('supreme_servers', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('account_id')->nullable();
+            $table->unsignedInteger('account_id')->nullable();
             $table->string('name');
             $table->string('slug');
             $table->string('ip');
@@ -23,6 +23,11 @@ class CreateSupremeServersTable extends Migration
             $table->nullableTimestamps();
 
             $table->unique('slug');
+
+            $table->foreign('account_id')
+                      ->references('id')
+                      ->on('supreme_server_accounts')
+                      ->onDelete('cascade');
         });
     }
 
