@@ -15,12 +15,12 @@ class CreateServer extends Feature
 
     public function handle(Servers $servers, Services $services)
     {
-        $attrs = $this->request->only(['name', 'slug', 'ip', 'port']);
-        $attrs['account_id'] = $this->request->get('account');
+        $attrs = $this->params->only(['name', 'slug', 'ip', 'port']);
+        $attrs['account_id'] = $this->params->get('account');
 
         /** @var \SuperV\Modules\Supreme\Domains\Server\Model\ServerModel $server */
         $server = $servers->create($attrs);
-        if ($serviceList = $this->request->get('services')) {
+        if ($serviceList = $this->params->get('services')) {
             if (!is_array($serviceList)) {
                 throw new \InvalidArgumentException('services must be array');
             }

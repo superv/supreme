@@ -1,7 +1,8 @@
 <?php namespace SuperV\Modules\Supreme;
 
 use SuperV\Modules\Supreme\Console\MakeService;
-use SuperV\Modules\Supreme\Domains\Server\Model\ServerComposer;
+use SuperV\Modules\Supreme\Domains\Server\Process;
+use SuperV\Modules\Supreme\Domains\Server\SymfonyProcess;
 use SuperV\Platform\Domains\Droplet\DropletServiceProvider;
 
 class SupremeModuleServiceProvider extends DropletServiceProvider
@@ -19,5 +20,9 @@ class SupremeModuleServiceProvider extends DropletServiceProvider
 
     protected $singletons = [
         'SuperV\Modules\Services\Domains\Service\Model\Services',
+    ];
+
+    protected $bindings = [
+        Process::class => SymfonyProcess::class,
     ];
 }

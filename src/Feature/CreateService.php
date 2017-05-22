@@ -14,7 +14,8 @@ class CreateService extends Feature
 
     public function handle(Services $services)
     {
-        $attrs = $this->request->only(['name', 'slug', 'agent', 'type']);
+        $attrs = $this->params->only(['name', 'slug', 'type']);
+        $attrs['agent_id'] = $this->params->agent;
 
         $service = $services->create($attrs);
 

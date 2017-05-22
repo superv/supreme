@@ -1,20 +1,40 @@
 <?php namespace SuperV\Modules\Supreme\Feature;
 
 use SuperV\Modules\Supreme\Domains\Server\Model\Servers;
+use SuperV\Modules\Supreme\Domains\Server\Server;
 use SuperV\Modules\Supreme\Domains\Service\Model\Services;
+use SuperV\Platform\Domains\Droplet\Droplet;
 use SuperV\Platform\Domains\Feature\Feature;
+use SuperV\Platform\Domains\Task\Model\Tasks;
 
 class InstallService extends Feature
 {
-    public static $route = 'post@api/supreme/servers/install';
+    public static $route = 'any@api/supreme/servers/install';
 
-    protected $resolves = [
+    public static $resolvable = [
         'server'  => Servers::class,
         'service' => Services::class,
     ];
 
-    public function handle(Services $services, Servers $servers)
+    public function handle(Tasks $tasks)
     {
-        dd($this->request->service->agentx);
+        $agent = Droplet::from($this->service->agent);
+        $command = $agent->getCommand('install');
+
+        $task = $tasks->create([
+            'server_id'  => $this->server->id,
+            'payload'    => [
+                'command' => serialize($command),
+            ],
+            'status'     => 'pending',
+            'created_at' => mysql_now(),
+        ]);
+
+        $task = $tasks->find($task->id);
+        $command = unserialize($task->payload['command']);
+
+        $server = superv(Server::class)->onServer($this->server);
+
+        return $this->dispatchJob(new $command($server));
     }
 }

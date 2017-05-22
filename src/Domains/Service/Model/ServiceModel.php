@@ -7,7 +7,8 @@ class ServiceModel extends EloquentModel
 {
     protected $table = 'supreme_services';
 
-    public function agentx() {
-        return $this->hasOne(DropletModel::class, 'id', 'agent');
+    public function agent()
+    {
+        return $this->hasOne(DropletModel::class, 'id', 'agent_id');
     }
 }
