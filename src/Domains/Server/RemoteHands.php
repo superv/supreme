@@ -143,13 +143,6 @@ trait RemoteHands
         return true;
     }
 
-    public function stub($stub, $tokens)
-    {
-        $location = $this->dispatch(new LocateResourceJob($stub, 'stub'));
-
-        return $this->dispatch(new ParseFile($location, $tokens));
-    }
-
     public function template($template, $tokens)
     {
         $location = $this->dispatch(new LocateTemplate($template));
