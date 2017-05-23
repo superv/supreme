@@ -130,25 +130,6 @@ class Script
         $this->tokens = array_merge($this->tokens, $tokens);
     }
 
-    /**
-     * @param ServerInterface $server
-     *
-     * @return Script
-     */
-    public function setServer(ServerInterface $server)
-    {
-        $this->server = $server;
-
-        return $this;
-    }
-
-    /**
-     * @return ServerInterface
-     */
-    public function getServer()
-    {
-        return $this->server;
-    }
 
     /**
      * @param bool $local

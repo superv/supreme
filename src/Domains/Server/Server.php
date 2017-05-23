@@ -5,6 +5,8 @@ use SuperV\Modules\Supreme\Domains\Server\Model\ServerModel;
 
 class Server
 {
+    use RemoteHands;
+
     /** @var  ServerModel */
     protected $model;
 
@@ -39,7 +41,7 @@ class Server
 
     public function onServer(ServerModel $server)
     {
-       $this->model = $server;
+        $this->model = $server;
 
         $this->keyFile = (new SSHKey($server->account->private_key))->make()->getTempFileLocation();
 
@@ -77,30 +79,22 @@ class Server
         }
     }
 
-    private function wrapWithSSH($command)
+    public function config($key = null, $value = null)
     {
-        if (!$this->keyFile || !file_exists($this->keyFile)) {
-            throw new InvalidArgumentException ('Private key file must exist');
+        $configFile = '/usr/local/superv/.superv';
+        if (!$this->fileExists('/usr/local/superv/.superv')) {
+            $this->mkdirR(dirname($configFile));
+            $this->saveToFile('{}', $configFile);
+        }
+        $config = json_decode($this->getFile($configFile), true);
+
+        if ($value) {
+            array_set($config, $key, $value);
+            $this->saveToFile(json_encode($config, JSON_PRETTY_PRINT), '/usr/local/superv/.superv');
+            return $this;
         }
 
-        $options = [
-            'CheckHostIP' => 'no',
-            'IdentitiesOnly' => 'yes',
-            'StrictHostKeyChecking' => 'no',
-            'PasswordAuthentication' => 'no',
-            'IdentityFile' => $this->keyFile
-        ];
-
-        $wrapper = 'ssh';
-        foreach ($options as $key => $value) {
-            $wrapper .= " -o {$key}={$value}";
-        }
-
-        $wrapper .= " -p {$this->port()} {$this->user()}@{$this->ip()}";
-        $wrapper .= " 'DEBIAN_FRONTEND=noninteractive bash -s'  << 'EOF'\n";
-        $wrapper .= "set -e \n {$command} \nEOF";
-
-        return $wrapper;
+        return $key ? array_get($config, $key) : $config;
     }
 
     public function output()
@@ -128,6 +122,29 @@ class Server
         return $this->model->ip;
     }
 
+    private function wrapWithSSH($command)
+    {
+        if (!$this->keyFile || !file_exists($this->keyFile)) {
+            throw new InvalidArgumentException ('Private key file must exist');
+        }
 
+        $options = [
+            'CheckHostIP'            => 'no',
+            'IdentitiesOnly'         => 'yes',
+            'StrictHostKeyChecking'  => 'no',
+            'PasswordAuthentication' => 'no',
+            'IdentityFile'           => $this->keyFile,
+        ];
 
+        $wrapper = 'ssh';
+        foreach ($options as $key => $value) {
+            $wrapper .= " -o {$key}={$value}";
+        }
+
+        $wrapper .= " -p {$this->port()} {$this->user()}@{$this->ip()}";
+        $wrapper .= " 'DEBIAN_FRONTEND=noninteractive bash -s'  << 'EOF'\n";
+        $wrapper .= "set -e \n {$command} \nEOF";
+
+        return $wrapper;
+    }
 }

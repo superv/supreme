@@ -21,6 +21,7 @@ class InstallService extends Feature
         $agent = Droplet::from($this->service->agent);
         $command = $agent->getCommand('install');
 
+        // create
         $task = $tasks->create([
             'server_id'  => $this->server->id,
             'payload'    => [
@@ -30,11 +31,22 @@ class InstallService extends Feature
             'created_at' => mysql_now(),
         ]);
 
+        // run
         $task = $tasks->find($task->id);
         $command = unserialize($task->payload['command']);
 
         $server = superv(Server::class)->onServer($this->server);
 
-        return $this->dispatchJob(new $command($server));
+        if (!$this->force && $server->config("{$agent->identifier()}.installed")) {
+            throw new \Exception('Already installed');
+        }
+
+        $result = $this->dispatchJob(new $command($server));
+
+        if ($result) {
+            $server->config("{$agent->identifier()}.installed", true);
+        }
+
+        return $result;
     }
 }

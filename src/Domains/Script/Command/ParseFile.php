@@ -17,7 +17,7 @@ class ParseFile
             return $this->parseString(file_get_contents($this->template), $this->tokens);
         }
 
-        throw new \RuntimeException('Template ' . $this->template . ' does not exist');
+        throw new \RuntimeException('File ' . $this->template . ' does not exist');
     }
 
     protected function parseString($script, array $tokens = [])
