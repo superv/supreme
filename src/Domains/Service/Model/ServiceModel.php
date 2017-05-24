@@ -11,4 +11,10 @@ class ServiceModel extends EloquentModel
     {
         return $this->hasOne(DropletModel::class, 'id', 'agent_id');
     }
+
+    /** @return DropletModel */
+    public function getAgent()
+    {
+        return $this->agent;
+    }
 }
