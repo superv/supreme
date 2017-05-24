@@ -9,10 +9,15 @@ class CreateAccount extends Feature
 
     public function handle(Accounts $accounts)
     {
-        \Log::info('reg', $this->params->all());
-        $attrs = $this->params->only(['name', 'slug', 'user', 'private_key', 'public_key']);
-
-        $account = $accounts->create($attrs);
+        $account = $accounts->create(
+            [
+                'name'        => $this->name,
+                'slug'        => $this->slug,
+                'user'        => $this->user,
+                'private_key' => $this->private_key,
+                'public_key'  => $this->public_key,
+            ]
+        );
 
         return ['id' => $account->id];
     }
