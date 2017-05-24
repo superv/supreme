@@ -16,6 +16,7 @@ class CreateSupremeServicesTable extends Migration
         Schema::create('supreme_services', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('agent_id');
+            $table->unsignedInteger('server_id');
             $table->string('name');
             $table->string('slug');
             $table->string('type');
@@ -25,6 +26,11 @@ class CreateSupremeServicesTable extends Migration
             $table->foreign('agent_id')
                   ->references('id')
                   ->on('platform_droplets')
+                  ->onDelete('cascade');
+
+            $table->foreign('server_id')
+                  ->references('id')
+                  ->on('supreme_servers')
                   ->onDelete('cascade');
         });
     }

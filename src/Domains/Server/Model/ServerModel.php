@@ -14,7 +14,12 @@ class ServerModel extends EloquentModel
 
     public function services()
     {
-        return $this->belongsToMany(ServiceModel::class, 'supreme_server_services', 'server_id', 'services_id');
+        return $this->hasMany(ServiceModel::class, 'server_id');
+    }
+
+    public function ip()
+    {
+        return $this->ip;
     }
 
 }
