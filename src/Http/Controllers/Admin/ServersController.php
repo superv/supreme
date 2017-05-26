@@ -4,6 +4,6 @@ class ServersController
 {
     public function index()
     {
-        return 'acp ok';
+        return view()->make('superv.modules.supreme::home');
     }
 }
