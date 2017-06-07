@@ -1,9 +1,11 @@
-<?php namespace SuperV\Modules\Supreme\Domains\Server\Model;
+<?php namespace SuperV\Modules\Supreme\Domains\Server\Model\Eloquent;
 
+use SuperV\Modules\Supreme\Domains\Server\Model\AccountModel;
+use SuperV\Modules\Supreme\Domains\Server\Model\ServerModelInterface;
 use SuperV\Modules\Supreme\Domains\Service\Model\ServiceModel;
 use SuperV\Platform\Domains\Model\EloquentModel;
 
-class ServerModel extends EloquentModel
+class ServerModel extends EloquentModel implements ServerModelInterface
 {
     protected $table = 'supreme_servers';
 

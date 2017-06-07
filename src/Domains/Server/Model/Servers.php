@@ -1,7 +1,7 @@
 <?php namespace SuperV\Modules\Supreme\Domains\Server\Model;
 
-use SuperV\Platform\Domains\Model\EloquentRepository;
+use SuperV\Platform\Domains\Model\RepositoryInterface;
 
-class Servers extends EloquentRepository
+interface Servers extends RepositoryInterface
 {
 }

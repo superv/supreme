@@ -1,6 +1,6 @@
 <?php namespace SuperV\Modules\Supreme\Domains\Service\Model;
 
-use SuperV\Modules\Supreme\Domains\Server\Model\ServerModel;
+use SuperV\Modules\Supreme\Domains\Server\Model\Eloquent\ServerModel;
 use SuperV\Platform\Domains\Droplet\Model\DropletModel;
 use SuperV\Platform\Domains\Model\EloquentModel;
 
@@ -21,7 +21,7 @@ class ServiceModel extends EloquentModel
 
     public function server()
     {
-        return $this->hasOne(ServerModel::class, 'id', 'server_id');
+        return $this->hasOne(\SuperV\Modules\Supreme\Domains\Server\Model\Eloquent\ServerModel::class, 'id', 'server_id');
     }
 
     /** @return ServerModel */

@@ -2,7 +2,6 @@
 
 use SuperV\Modules\Supreme\Domains\Server\Model\Accounts;
 use SuperV\Modules\Supreme\Domains\Server\Model\Servers;
-use SuperV\Modules\Supreme\Domains\Service\Model\Services;
 use SuperV\Platform\Domains\Feature\Feature;
 
 class CreateServer extends Feature
@@ -13,9 +12,9 @@ class CreateServer extends Feature
         'account' => Accounts::class . "->id",
     ];
 
-    public function handle(Servers $servers, Services $services)
+    public function handle(Servers $servers)
     {
-        /** @var \SuperV\Modules\Supreme\Domains\Server\Model\ServerModel $server */
+        /** @var \SuperV\Modules\Supreme\Domains\Server\Model\Eloquent\ServerModel $server */
         $server = $servers->create(
             [
                 'name'       => $this->name,
@@ -36,6 +35,6 @@ class CreateServer extends Feature
 //            }
 //        }
 
-        return ['id' => $server->id];
+        return ['id' => $server->id()];
     }
 }

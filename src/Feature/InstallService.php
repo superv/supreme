@@ -1,6 +1,6 @@
 <?php namespace SuperV\Modules\Supreme\Feature;
 
-use SuperV\Modules\Supreme\Domains\Server\Model\Servers;
+use SuperV\Modules\Supreme\Domains\Server\Model\Eloquent\Servers;
 use SuperV\Modules\Supreme\Domains\Server\Server;
 use SuperV\Modules\Supreme\Domains\Service\Model\Services;
 use SuperV\Platform\Domains\Droplet\Droplet;
