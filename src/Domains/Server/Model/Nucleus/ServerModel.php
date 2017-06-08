@@ -1,7 +1,8 @@
 <?php namespace SuperV\Modules\Supreme\Domains\Server\Model\Nucleus;
 
-use SuperV\Nucleus\Domains\Entry\EntryProxy;
+use SuperV\Modules\Supreme\Domains\Server\Model\Contracts\ServerModelInterface;
+use SuperV\Nucleus\Domains\Entry\Nucleus;
 
-class ServerModel extends EntryProxy
+class ServerModel extends Nucleus implements ServerModelInterface
 {
 }

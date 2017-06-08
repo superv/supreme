@@ -1,4 +1,4 @@
-<?php namespace SuperV\Modules\Supreme\Domains\Server\Model;
+<?php namespace SuperV\Modules\Supreme\Domains\Server\Model\Eloquent;
 
 use SuperV\Platform\Domains\Model\EloquentModel;
 

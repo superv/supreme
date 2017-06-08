@@ -1,6 +1,6 @@
 <?php namespace SuperV\Modules\Supreme\Feature;
 
-use SuperV\Modules\Supreme\Domains\Server\Model\Accounts;
+use SuperV\Modules\Supreme\Domains\Server\Model\Contracts\Accounts;
 use SuperV\Platform\Domains\Feature\Feature;
 
 class CreateAccount extends Feature

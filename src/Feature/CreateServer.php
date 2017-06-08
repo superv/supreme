@@ -1,7 +1,7 @@
 <?php namespace SuperV\Modules\Supreme\Feature;
 
-use SuperV\Modules\Supreme\Domains\Server\Model\Accounts;
-use SuperV\Modules\Supreme\Domains\Server\Model\Servers;
+use SuperV\Modules\Supreme\Domains\Server\Model\Contracts\Accounts;
+use SuperV\Modules\Supreme\Domains\Server\Model\Contracts\Servers;
 use SuperV\Platform\Domains\Feature\Feature;
 
 class CreateServer extends Feature
@@ -14,6 +14,7 @@ class CreateServer extends Feature
 
     public function handle(Servers $servers)
     {
+        dd($this->account);
         /** @var \SuperV\Modules\Supreme\Domains\Server\Model\Eloquent\ServerModel $server */
         $server = $servers->create(
             [

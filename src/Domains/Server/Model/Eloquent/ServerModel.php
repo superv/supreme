@@ -1,7 +1,6 @@
 <?php namespace SuperV\Modules\Supreme\Domains\Server\Model\Eloquent;
 
-use SuperV\Modules\Supreme\Domains\Server\Model\AccountModel;
-use SuperV\Modules\Supreme\Domains\Server\Model\ServerModelInterface;
+use SuperV\Modules\Supreme\Domains\Server\Model\Contracts\ServerModelInterface;
 use SuperV\Modules\Supreme\Domains\Service\Model\ServiceModel;
 use SuperV\Platform\Domains\Model\EloquentModel;
 

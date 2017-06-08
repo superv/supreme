@@ -1,4 +1,4 @@
-<?php namespace SuperV\Modules\Supreme\Domains\Server\Model;
+<?php namespace SuperV\Modules\Supreme\Domains\Server\Model\Contracts;
 
 use SuperV\Platform\Domains\Model\RepositoryInterface;
 

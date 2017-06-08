@@ -1,8 +1,12 @@
 <?php namespace SuperV\Modules\Supreme;
 
 use SuperV\Modules\Supreme\Console\MakeService;
-use SuperV\Modules\Supreme\Domains\Server\Model\Nucleus\Servers;
-use SuperV\Modules\Supreme\Domains\Server\Model\Servers as ServersInterface;
+use SuperV\Modules\Supreme\Domains\Server\Model\Contracts\AccountModelInterface;
+use SuperV\Modules\Supreme\Domains\Server\Model\Contracts\Accounts;
+use SuperV\Modules\Supreme\Domains\Server\Model\Contracts\Servers;
+use SuperV\Modules\Supreme\Domains\Server\Model\Nucleus\AccountModel;
+use SuperV\Modules\Supreme\Domains\Server\Model\Nucleus\Accounts as AccountsNucleus;
+use SuperV\Modules\Supreme\Domains\Server\Model\Nucleus\Servers as ServersNucleus;
 use SuperV\Modules\Supreme\Domains\Server\Process;
 use SuperV\Modules\Supreme\Domains\Server\SymfonyProcess;
 use SuperV\Platform\Domains\Droplet\DropletServiceProvider;
@@ -25,7 +29,9 @@ class SupremeModuleServiceProvider extends DropletServiceProvider
     ];
 
     protected $bindings = [
-        Process::class => SymfonyProcess::class,
-        ServersInterface::class => Servers::class,
+        Process::class               => SymfonyProcess::class,
+        Servers::class               => ServersNucleus::class,
+        Accounts::class              => AccountsNucleus::class,
+        AccountModelInterface::class => AccountModel::class,
     ];
 }
