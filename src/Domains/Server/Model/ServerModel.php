@@ -1,12 +1,18 @@
-<?php namespace SuperV\Modules\Supreme\Domains\Server\Model\Eloquent;
+<?php namespace SuperV\Modules\Supreme\Domains\Server\Model;
 
-use SuperV\Modules\Supreme\Domains\Server\Model\Contracts\ServerModelInterface;
 use SuperV\Modules\Supreme\Domains\Service\Model\ServiceModel;
-use SuperV\Platform\Domains\Model\EloquentModel;
+use SuperV\Nucleus\Domains\Entry\Nucleus;
 
-class ServerModel extends EloquentModel implements ServerModel
+class ServerModel extends Nucleus
 {
     protected $table = 'supreme_servers';
+
+//    public static function __callStatic($method, $parameters)
+//    {
+//        return (new static)->$method(...$parameters);
+//    }
+//
+
 
     public function account()
     {
@@ -22,5 +28,7 @@ class ServerModel extends EloquentModel implements ServerModel
     {
         return $this->ip;
     }
-
 }
+
+
+

@@ -1,11 +1,11 @@
 <?php namespace SuperV\Modules\Supreme;
 
 use SuperV\Modules\Supreme\Console\MakeService;
+use SuperV\Modules\Supreme\Domains\Server\Model\AccountModel as AccountModelNucleus;
 use SuperV\Modules\Supreme\Domains\Server\Model\Contracts\AccountModel;
 use SuperV\Modules\Supreme\Domains\Server\Model\Contracts\Accounts;
 use SuperV\Modules\Supreme\Domains\Server\Model\Contracts\ServerModelInterface;
 use SuperV\Modules\Supreme\Domains\Server\Model\Contracts\Servers;
-use SuperV\Modules\Supreme\Domains\Server\Model\Nucleus\AccountModel as AccountModelNucleus;
 use SuperV\Modules\Supreme\Domains\Server\Model\Nucleus\Accounts as AccountsNucleus;
 use SuperV\Modules\Supreme\Domains\Server\Model\Nucleus\ServerModel;
 use SuperV\Modules\Supreme\Domains\Server\Model\Nucleus\Servers as ServersNucleus;
