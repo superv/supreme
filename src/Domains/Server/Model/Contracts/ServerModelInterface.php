@@ -2,6 +2,6 @@
 
 use SuperV\Platform\Domains\Entry\EntryInterface;
 
-interface ServerModel extends EntryInterface
+interface ServerModelInterface extends EntryInterface
 {
 }
