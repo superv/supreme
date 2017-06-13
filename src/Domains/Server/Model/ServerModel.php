@@ -5,8 +5,6 @@ use SuperV\Nucleus\Domains\Entry\Nucleus;
 
 class ServerModel extends Nucleus
 {
-    protected $table = 'supreme_servers';
-
 //    public static function __callStatic($method, $parameters)
 //    {
 //        return (new static)->$method(...$parameters);
