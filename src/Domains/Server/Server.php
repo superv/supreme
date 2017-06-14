@@ -1,13 +1,13 @@
 <?php namespace SuperV\Modules\Supreme\Domains\Server;
 
 use InvalidArgumentException;
-use SuperV\Modules\Supreme\Domains\Server\Model\Eloquent\ServerModel;
+use SuperV\Modules\Supreme\Domains\Server\Model\ServerModel;
 
 class Server
 {
     use RemoteHands;
 
-    /** @var  \SuperV\Modules\Supreme\Domains\Server\Model\Eloquent\ServerModel */
+    /** @var  \SuperV\Modules\Supreme\Domains\Server\Model\ServerModel */
     protected $model;
 
     protected $keyFile;

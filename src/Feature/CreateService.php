@@ -1,6 +1,5 @@
 <?php namespace SuperV\Modules\Supreme\Feature;
 
-use SuperV\Modules\Supreme\Domains\Server\Model\Eloquent\Servers;
 use SuperV\Modules\Supreme\Domains\Service\Model\ServiceModel;
 use SuperV\Modules\Supreme\Domains\Service\Model\Services;
 use SuperV\Platform\Domains\Feature\Feature;

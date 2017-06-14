@@ -20,7 +20,7 @@ class ServiceModel extends Nucleus
 
     public function server()
     {
-        return $this->hasOne(\SuperV\Modules\Supreme\Domains\Server\Model\Eloquent\ServerModel::class, 'id', 'server_id');
+        return $this->hasOne(\SuperV\Modules\Supreme\Domains\Server\Model\ServerModel::class, 'id', 'server_id');
     }
 
     /** @return ServerModel */
