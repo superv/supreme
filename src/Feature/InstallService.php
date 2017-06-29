@@ -19,7 +19,9 @@ class InstallService extends Feature
 
     public function handle(Tasks $tasks)
     {
-        $service = ServiceModel::find($this->service_id);
+        if (!$service = ServiceModel::find($this->service_id)) {
+            throw new \Exception('Service not found');
+        }
 
         $agent = Droplet::from($service->agent);
         $command = $agent->getCommand('install');

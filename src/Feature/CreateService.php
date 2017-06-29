@@ -1,6 +1,5 @@
 <?php namespace SuperV\Modules\Supreme\Feature;
 
-use SuperV\Modules\Supreme\Domains\Service\Model\ServiceModel;
 use SuperV\Modules\Supreme\Domains\Service\Model\Services;
 use SuperV\Platform\Domains\Feature\Feature;
 
@@ -13,9 +12,9 @@ class CreateService extends Feature
 //        'server' => Servers::class . '->id',
 //    ];
 
-    public function handle()
+    public function handle(Services $services)
     {
-        $service = ServiceModel::create([
+        $service = $services->create([
             'name'      => $this->name,
             'slug'      => $this->slug,
             'type'      => $this->type,
@@ -23,6 +22,6 @@ class CreateService extends Feature
             'server_id' => $this->server_id,
         ]);
 
-        return ['id' => $service->id()];
+        return ['id' => $service->id];
     }
 }

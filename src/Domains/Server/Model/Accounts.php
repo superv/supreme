@@ -1,7 +1,7 @@
 <?php namespace SuperV\Modules\Supreme\Domains\Server\Model;
 
-use SuperV\Nucleus\Domains\Entry\NucleusRepository;
+use SuperV\Platform\Domains\Model\EloquentRepository;
 
-class Accounts extends NucleusRepository
+class Accounts extends EloquentRepository
 {
 }

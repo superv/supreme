@@ -20,6 +20,8 @@ class SupremeModuleServiceProvider extends DropletServiceProvider
 
     protected $singletons = [
         'SuperV\Modules\Services\Domains\Service\Model\Services',
+        'SuperV\Modules\Supreme\Domains\Server\Model\Servers',
+        'SuperV\Modules\Supreme\Domains\Server\Model\Accounts'
     ];
 
     protected $bindings = [

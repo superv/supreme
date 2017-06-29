@@ -1,10 +1,16 @@
 <?php namespace SuperV\Modules\Supreme\Domains\Server\Model;
 
 use SuperV\Modules\Supreme\Domains\Service\Model\ServiceModel;
-use SuperV\Nucleus\Domains\Entry\Nucleus;
+use SuperV\Platform\Domains\Model\EloquentModel;
 
-class ServerModel extends Nucleus
+class ServerModel extends EloquentModel
 {
+    protected $table = 'supreme_servers';
+
+    public function account()
+    {
+        return $this->hasOne(AccountModel::class, 'id', 'account_id');
+    }
 
     public function services()
     {

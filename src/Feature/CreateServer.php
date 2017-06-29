@@ -13,15 +13,15 @@ class CreateServer extends Feature
 //        'account' => Accounts::class,
 //    ];
 
-    public function handle()
+    public function handle(Servers $servers)
     {
-        $server = ServerModel::create(
+        $server = $servers->create(
             [
                 'name'    => $this->name,
                 'slug'    => $this->slug,
                 'ip'      => $this->ip,
                 'port'    => $this->port,
-                'account' => $this->account_id,
+                'account_id' => $this->account_id,
             ]
         );
 //        if ($serviceList = $this->params->get('services')) {
@@ -35,6 +35,6 @@ class CreateServer extends Feature
 //            }
 //        }
 
-        return ['id' => $server->id()];
+        return ['id' => $server->id];
     }
 }
