@@ -7,7 +7,7 @@ class ServiceModel extends Nucleus
 {
     protected $table = 'supreme_services';
 
-    public function agent()
+    public function agentxx()
     {
         return $this->hasOne(DropletModel::class, 'id', 'agent_id');
     }
@@ -18,7 +18,7 @@ class ServiceModel extends Nucleus
         return $this->agent;
     }
 
-    public function server()
+    public function serverxxxx()
     {
         return $this->hasOne(\SuperV\Modules\Supreme\Domains\Server\Model\ServerModel::class, 'id', 'server_id');
     }
