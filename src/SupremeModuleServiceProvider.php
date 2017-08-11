@@ -1,6 +1,7 @@
 <?php namespace SuperV\Modules\Supreme;
 
 use SuperV\Modules\Supreme\Console\MakeService;
+use SuperV\Modules\Supreme\Domains\Server\Manifests\ServerManifest;
 use SuperV\Modules\Supreme\Domains\Server\Process;
 use SuperV\Modules\Supreme\Domains\Server\SymfonyProcess;
 use SuperV\Platform\Domains\Droplet\DropletServiceProvider;
@@ -26,5 +27,9 @@ class SupremeModuleServiceProvider extends DropletServiceProvider
 
     protected $bindings = [
         Process::class => SymfonyProcess::class,
+    ];
+
+    protected $manifests = [
+        ServerManifest::class
     ];
 }
