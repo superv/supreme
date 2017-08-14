@@ -2,12 +2,9 @@
 
 use SuperV\Modules\Supreme\Domains\Server\Model\ServerModel;
 use SuperV\Platform\Domains\Droplet\Model\DropletModel;
-use SuperV\Platform\Domains\Model\EloquentModel;
 
-class ServiceModel extends EloquentModel
+class ServiceModel extends ServiceEntryModel
 {
-    protected $table = 'supreme_services';
-
     public function agent()
     {
         return $this->hasOne(DropletModel::class, 'id', 'agent_id');

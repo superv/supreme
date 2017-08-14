@@ -14,9 +14,11 @@ class ServerTableBuilder extends TableBuilder
     ];
 
     protected $buttons = [
-        'edit'   => [
-            'text' => 'Edit',
-            'type' => 'info',
-        ],
+        'edit',
+        'install' => [
+            'text' => 'Install Service',
+            'type' => 'success',
+            'href' => 'supreme/services/1/install'
+        ]
     ];
 }
