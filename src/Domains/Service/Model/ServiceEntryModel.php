@@ -20,6 +20,12 @@ class ServiceEntryModel extends EntryModel
             'related'  => DropletModel::class,
             'multiple' => false,
         ],
-
     ];
+
+    protected $relationships = ['server', 'agent'];
+//
+//    public function getAttribute($key)
+//    {
+//        parent::getAttribute($key);
+//    }
 }

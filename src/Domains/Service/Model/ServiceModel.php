@@ -2,6 +2,7 @@
 
 use SuperV\Modules\Supreme\Domains\Server\Model\ServerModel;
 use SuperV\Platform\Domains\Droplet\Model\DropletModel;
+use SuperV\Platform\Domains\Droplet\Model\Droplets;
 
 class ServiceModel extends ServiceEntryModel
 {
@@ -14,6 +15,11 @@ class ServiceModel extends ServiceEntryModel
     public function getAgent()
     {
         return $this->agent;
+    }
+
+    public function getPossibleAgents()
+    {
+        return DropletModel::where('type', 'agent')->get();
     }
 
     public function server()

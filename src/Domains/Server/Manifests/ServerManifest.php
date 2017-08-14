@@ -15,7 +15,7 @@ class ServerManifest extends ModelManifest
         return [
             'index' => [
                 'navigation' => true,
-                'page_title' => 'Servers Index',
+                'title' => 'Servers Index',
                 'route'      => 'acp@supreme::servers.index',
                 'url'        => 'supreme/servers',
                 'handler'    => function (ServerTableBuilder $builder) {
@@ -23,7 +23,7 @@ class ServerManifest extends ModelManifest
                 },
             ],
             'edit'  => [
-                'page_title' => 'Edit Server',
+                'title' => 'Edit Server',
                 'route'      => 'acp@supreme::servers.edit',
                 'url'        => 'supreme/servers/{id}/edit',
                 'handler'    => function (FormBuilder $builder, Servers $servers, $id) {
