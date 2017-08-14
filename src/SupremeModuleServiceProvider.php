@@ -4,6 +4,7 @@ use SuperV\Modules\Supreme\Console\MakeService;
 use SuperV\Modules\Supreme\Domains\Server\Manifests\ServerManifest;
 use SuperV\Modules\Supreme\Domains\Server\Process;
 use SuperV\Modules\Supreme\Domains\Server\SymfonyProcess;
+use SuperV\Modules\Supreme\Feature\InstallService;
 use SuperV\Platform\Domains\Droplet\DropletServiceProvider;
 
 class SupremeModuleServiceProvider extends DropletServiceProvider
@@ -13,7 +14,7 @@ class SupremeModuleServiceProvider extends DropletServiceProvider
     ];
 
     protected $features = [
-        'SuperV\Modules\Supreme\Feature\InstallService',
+        InstallService::class,
         'SuperV\Modules\Supreme\Feature\CreateServer',
         'SuperV\Modules\Supreme\Feature\CreateService',
         'SuperV\Modules\Supreme\Feature\CreateAccount',
@@ -22,7 +23,7 @@ class SupremeModuleServiceProvider extends DropletServiceProvider
     protected $singletons = [
         'SuperV\Modules\Services\Domains\Service\Model\Services',
         'SuperV\Modules\Supreme\Domains\Server\Model\Servers',
-        'SuperV\Modules\Supreme\Domains\Server\Model\Accounts'
+        'SuperV\Modules\Supreme\Domains\Server\Model\Accounts',
     ];
 
     protected $bindings = [
@@ -30,6 +31,6 @@ class SupremeModuleServiceProvider extends DropletServiceProvider
     ];
 
     protected $manifests = [
-        ServerManifest::class
+        SupremeManifest::class
     ];
 }
