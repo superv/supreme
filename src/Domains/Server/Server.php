@@ -91,6 +91,7 @@ class Server
         if ($value) {
             array_set($config, $key, $value);
             $this->saveToFile(json_encode($config, JSON_PRETTY_PRINT), '/usr/local/superv/.superv');
+
             return $this;
         }
 
@@ -133,6 +134,7 @@ class Server
             'IdentitiesOnly'         => 'yes',
             'StrictHostKeyChecking'  => 'no',
             'PasswordAuthentication' => 'no',
+            'ConnectTimeout'         => 3,
             'IdentityFile'           => $this->keyFile,
         ];
 

@@ -17,16 +17,16 @@ class InstallService extends Feature
 //        'service' => Services::class,
 //    ];
 
-    public function handle(Tasks $tasks)
+    public function handle(Tasks $tasks, Services $services)
     {
-        if (!$service = ServiceModel::find($this->service_id)) {
+        if (!$service = $services->find($this->service_id)) {
             throw new \Exception('Service not found');
         }
 
         $agent = Droplet::from($service->agent);
         $command = $agent->getCommand('install');
 
-        // create
+        // create the task
         $task = $tasks->create([
             'server_id'  => $service->server->id,
             'payload'    => [
@@ -46,7 +46,7 @@ class InstallService extends Feature
             throw new \Exception('Already installed');
         }
 
-        $result = $this->dispatchJob(new $command($server));
+        $result = $this->dispatch(new $command($server));
 
         if ($result) {
             $server->config("{$agent->identifier()}.installed", true);

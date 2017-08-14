@@ -3,7 +3,6 @@
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use SuperV\Modules\Supreme\Domains\Script\Command\ParseFile;
 use SuperV\Modules\Supreme\Domains\Script\Script;
-use SuperV\Platform\Domains\Droplet\Jobs\LocateResourceJob;
 
 trait RemoteHands
 {
