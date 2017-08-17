@@ -2,6 +2,7 @@
 
 use SuperV\Modules\Supreme\Domains\Service\Model\ServiceModel;
 use SuperV\Modules\Supreme\Domains\Service\Model\Services;
+use SuperV\Modules\Supreme\Feature\InstallService;
 use SuperV\Platform\Domains\Manifest\ModelManifest;
 use SuperV\Platform\Domains\UI\Form\FormBuilder;
 use SuperV\Platform\Domains\UI\Table\TableBuilder;
@@ -46,6 +47,10 @@ class ServiceManifest extends ModelManifest
                     'index',
                 ],
             ],
+            'install' => [
+                'url' => 'supreme/services/{id}/install',
+                'handler' => InstallService::class ."@handle"
+            ],
             'edit'   => [
                 'title'   => 'Edit Service',
                 'route'   => 'acp@supreme::service.edit',
@@ -54,8 +59,12 @@ class ServiceManifest extends ModelManifest
                     return $builder->render($services->find($id));
                 },
                 'buttons' => [
-                    'create' ,
+                    'create',
                     'delete',
+                    'install_dns' => [
+                        'text' => 'Install Server',
+                        'href' => 'supreme/services/{entry.id}/install'
+                    ],
                 ],
                 'tabs'    => [
                     'ajax'    => true,

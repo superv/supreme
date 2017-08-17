@@ -23,6 +23,9 @@ class Server
      */
     private $process;
 
+    /** @var  callable */
+    protected $listener;
+
     public function __construct(Process $process)
     {
         $this->process = $process;
@@ -55,18 +58,26 @@ class Server
         return $this;
     }
 
-    public function cmd($command)
+    public function cmd($command, callable $callback = null)
     {
         if (!$this->local) {
             $command = $this->wrapWithSSH($command);
         }
 
+        if (!$callback && $this->listener) {
+            $callback = $this->listener;
+        }
+
         try {
-            $this->process->run($command);
+            $this->process->run($command, $callback);
             $this->output = $this->process->output();
             $this->success = $this->process->success();
         } catch (\Exception $e) {
             $this->output = $e->getMessage();
+        }
+
+        if (!$this->success) {
+            throw new ServerException($this->output);
         }
 
         return $this;
@@ -149,4 +160,16 @@ class Server
 
         return $wrapper;
     }
+
+    /**
+     * @param callable $listener
+     *
+     * @return Server
+     */
+    public function setListener(callable $listener): Server
+    {
+        $this->listener = $listener;
+
+        return $this;
+}
 }
