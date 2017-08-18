@@ -4,10 +4,10 @@ use SuperV\Modules\Supreme\Domains\Service\Model\Services;
 use SuperV\Platform\Domains\Droplet\Agent\Agent;
 use SuperV\Platform\Domains\Droplet\Droplet;
 use SuperV\Platform\Domains\Feature\Feature;
-use SuperV\Platform\Domains\Task\Features\DeployTask;
-use SuperV\Platform\Domains\Task\Model\TaskModel;
+use SuperV\Platform\Domains\Task\Deployer;
+use SuperV\Platform\Domains\Task\Jobs\DeployTaskJob;
 use SuperV\Platform\Domains\Task\Model\Tasks;
-use SuperV\Platform\Domains\Task\Task;
+use SuperV\Platform\Domains\Task\TaskBuilder;
 
 class InstallService extends Feature
 {
@@ -15,7 +15,7 @@ class InstallService extends Feature
 
     public $force = true;
 
-    public function handle(Tasks $tasks, Services $services)
+    public function handle(Services $services, TaskBuilder $builder)
     {
         if (!$service = $services->find(request()->route('id'))) {
             throw new \Exception('Service not found');
@@ -24,30 +24,21 @@ class InstallService extends Feature
         /** @var Agent $agent */
         $agent = Droplet::from($service->agent);
 
-        // create the task
-        $taskModel = $tasks->create([
-            'server_id'  => $service->server->id,
-            'payload'    => [
-                'commands' => [
-                    $agent->getCommand('install')
-                ],
-            ],
-            'status'     => TaskModel::PENDING,
-            'created_at' => mysql_now(),
-        ]);
+        $task = $builder->setTitle('Install Service Task')->setPayload([
+                'service_id' => $service->getId(),
+                'feature'    => $agent->getFeature('install'),
+            ])->build();
 
-        $this->dispatch(new DeployTask(new Task($taskModel), $service));
+        $this->dispatch(new DeployTaskJob($task));
 
+//        $this->dispatch(new Deployer(new Task($taskModel)));
 
         //        if (!$this->force && $remote->config("{$agent->identifier()}.installed")) {
         //            throw new \Exception('Already installed');
         //        }
 
-
         //        if ($result) {
         //            $remote->config("{$this->service->getAgent()->identifier()}.installed", true);
         //        }
     }
-
-
 }

@@ -2,12 +2,7 @@
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use SuperV\Modules\Supreme\Domains\Script\Command\LocateScript;
-use SuperV\Modules\Supreme\Domains\Script\Command\LocateWrapper;
 use SuperV\Modules\Supreme\Domains\Script\Command\ParseTemplate;
-use SuperV\Modules\Supreme\Domains\Script\Command\PrepareServerKey;
-use SuperV\Modules\Supreme\Domains\Script\Command\PrepareServerTokens;
-use SuperV\Modules\Supreme\Domains\Script\Command\WrapCommand;
-use Vizra\SupervModule\Server\Contract\ServerInterface;
 
 class Script
 {
@@ -42,9 +37,6 @@ class Script
     public function make()
     {
         $this->dispatch(new LocateScript($this));
-//        $this->dispatch(new LocateWrapper($this));
-//        $this->dispatch(new PrepareServerKey($this));
-//        $this->dispatch(new PrepareServerTokens($this));
         $this->dispatch(new ParseTemplate($this));
 
         return $this;

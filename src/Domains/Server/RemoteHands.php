@@ -12,12 +12,12 @@ trait RemoteHands
     {
         $script = $this->makeScript('CheckFileExists', ['path' => $path]);
 
-        return $this->cmd($script)->success();
+        return $this->setScript($script)->execute()->success();
     }
 
     public function getFile($file)
     {
-        $this->cmd("cat {$file}");
+        $this->setScript("cat {$file}");
 
         return $this->output();
     }
@@ -142,13 +142,6 @@ trait RemoteHands
         return true;
     }
 
-    public function template($template, $tokens)
-    {
-        $location = $this->dispatch(new LocateTemplate($template));
-
-        return $this->dispatch(new ParseFile($location, $tokens));
-    }
-
     protected function makeScript($template, $tokens)
     {
         return (new Script($template))
@@ -159,6 +152,6 @@ trait RemoteHands
 
     protected function runScript($template, $tokens)
     {
-        return $this->cmd($this->makeScript($template, $tokens));
+        return $this->setScript($this->makeScript($template, $tokens));
     }
 }

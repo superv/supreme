@@ -2,7 +2,6 @@
 
 use SuperV\Modules\Supreme\Domains\Script\Script;
 use SuperV\Platform\Domains\Droplet\Model\DropletCollection;
-use Vizra\SupervModule\SupervModule;
 
 class LocateScript
 {

@@ -1,9 +1,11 @@
 <?php namespace SuperV\Modules\Supreme;
 
 use SuperV\Modules\Supreme\Console\MakeService;
-use SuperV\Modules\Supreme\Domains\Server\Manifests\ServerManifest;
+use SuperV\Modules\Supreme\Domains\Server\Model\Accounts;
+use SuperV\Modules\Supreme\Domains\Server\Model\Servers;
 use SuperV\Modules\Supreme\Domains\Server\Process;
 use SuperV\Modules\Supreme\Domains\Server\SymfonyProcess;
+use SuperV\Modules\Supreme\Domains\Service\Model\Services;
 use SuperV\Modules\Supreme\Feature\InstallService;
 use SuperV\Platform\Domains\Droplet\DropletServiceProvider;
 
@@ -21,16 +23,18 @@ class SupremeModuleServiceProvider extends DropletServiceProvider
     ];
 
     protected $singletons = [
-        'SuperV\Modules\Services\Domains\Service\Model\Services',
-        'SuperV\Modules\Supreme\Domains\Server\Model\Servers',
-        'SuperV\Modules\Supreme\Domains\Server\Model\Accounts',
+        Services::class,
+        Servers::class,
+        Accounts::class,
     ];
 
     protected $bindings = [
         Process::class => SymfonyProcess::class,
+        'services'     => Services::class,
+        'servers'      => Servers::class,
     ];
 
     protected $manifests = [
-        SupremeManifest::class
+        SupremeManifest::class,
     ];
 }
