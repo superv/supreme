@@ -60,10 +60,11 @@ class ServiceManifest extends ModelManifest
                 },
                 'buttons' => [
                     'create',
-                    'delete',
+                    'delete' => ['class' => 'remote', 'href' => '/Delete'],
                     'install_dns' => [
                         'text' => 'Install Server',
-                        'href' => 'supreme/services/{entry.id}/install'
+                        'href' => 'supreme/services/{entry.id}/install',
+                        'class' => 'remote'
                     ],
                 ],
                 'tabs'    => [
