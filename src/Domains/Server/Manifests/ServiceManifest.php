@@ -11,11 +11,11 @@ class ServiceManifest extends ModelManifest
 {
     protected $model = ServiceModel::class;
 
-    protected $table = 'supreme_services';
-
-    protected $relations = [];
-
-    protected $fields = [];
+//    protected $table = 'supreme_services';
+//
+//    protected $relations = [];
+//
+//    protected $fields = [];
 
     public function getPages()
     {
