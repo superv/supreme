@@ -1,4 +1,4 @@
-<?php namespace SuperV\Modules\Supreme\Domains\Server\Model;
+<?php namespace SuperV\Modules\Supreme\Domains\Server\Model\Entry;
 
 use SuperV\Platform\Domains\Entry\EntryModel;
 

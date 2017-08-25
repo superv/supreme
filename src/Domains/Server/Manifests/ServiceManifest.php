@@ -20,7 +20,7 @@ class ServiceManifest extends ModelManifest
     public function getPages()
     {
         return [
-            'index'  => [
+            'index'   => [
                 'navigation' => true,
                 'title'      => 'Services',
                 'route'      => 'acp@supreme::services.index',
@@ -35,7 +35,7 @@ class ServiceManifest extends ModelManifest
                     'create',
                 ],
             ],
-            'create' => [
+            'create'  => [
                 'navigation' => true,
                 'title'      => 'Add New Service',
                 'route'      => 'acp@supreme::services.create',
@@ -47,11 +47,21 @@ class ServiceManifest extends ModelManifest
                     'index',
                 ],
             ],
-            'install' => [
-                'url' => 'supreme/services/{id}/install',
-                'handler' => InstallService::class ."@handle"
+            'delete'  => [
+                'title' => 'Delete Service',
+                'route'   => 'acp@hosting::services.delete',
+                'url'     => 'supreme/services/{service}/delete',
+                'handler' => function (ServiceModel $service) {
+//                    $service->delete();
+
+                    return redirect()->route('acp@supreme::services.index');
+                },
             ],
-            'edit'   => [
+            'install' => [
+                'url'     => 'supreme/services/{id}/install',
+                'handler' => InstallService::class . "@handle",
+            ],
+            'edit'    => [
                 'title'   => 'Edit Service',
                 'route'   => 'acp@supreme::service.edit',
                 'url'     => 'supreme/services/{id}/edit',
@@ -60,11 +70,11 @@ class ServiceManifest extends ModelManifest
                 },
                 'buttons' => [
                     'create',
-                    'delete' => ['class' => 'remote', 'href' => '/Delete'],
+                    'delete'      => ['confirm' => true],
                     'install_dns' => [
-                        'text' => 'Install Server',
-                        'href' => 'supreme/services/{entry.id}/install',
-                        'class' => 'remote'
+                        'text'  => 'Install Server',
+                        'href'  => 'supreme/services/{entry.id}/install',
+                        'class' => 'remote',
                     ],
                 ],
                 'tabs'    => [

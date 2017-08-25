@@ -1,5 +1,6 @@
 <?php namespace SuperV\Modules\Supreme\Domains\Server\Model;
 
+use SuperV\Modules\Supreme\Domains\Server\Model\Entry\ServerEntryModel;
 use SuperV\Modules\Supreme\Domains\Service\Model\ServiceModel;
 
 class ServerModel extends ServerEntryModel
