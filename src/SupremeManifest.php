@@ -1,7 +1,7 @@
 <?php namespace SuperV\Modules\Supreme;
 
-use SuperV\Modules\Supreme\Domains\Server\Manifests\ServerManifest;
-use SuperV\Modules\Supreme\Domains\Server\Manifests\ServiceManifest;
+use SuperV\Modules\Supreme\Domains\Server\Model\ServerManifest;
+use SuperV\Modules\Supreme\Domains\Service\Model\ServiceManifest;
 use SuperV\Platform\Domains\Manifest\DropletManifest;
 
 class SupremeManifest extends DropletManifest

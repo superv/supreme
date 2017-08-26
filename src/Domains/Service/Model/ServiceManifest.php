@@ -1,7 +1,5 @@
-<?php namespace SuperV\Modules\Supreme\Domains\Server\Manifests;
+<?php namespace SuperV\Modules\Supreme\Domains\Service\Model;
 
-use SuperV\Modules\Supreme\Domains\Service\Model\ServiceModel;
-use SuperV\Modules\Supreme\Domains\Service\Model\Services;
 use SuperV\Modules\Supreme\Feature\InstallService;
 use SuperV\Platform\Domains\Manifest\ModelManifest;
 use SuperV\Platform\Domains\UI\Form\FormBuilder;
@@ -9,13 +7,6 @@ use SuperV\Platform\Domains\UI\Table\TableBuilder;
 
 class ServiceManifest extends ModelManifest
 {
-    protected $model = ServiceModel::class;
-
-//    protected $table = 'supreme_services';
-//
-//    protected $relations = [];
-//
-//    protected $fields = [];
 
     public function getPages()
     {

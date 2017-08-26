@@ -1,14 +1,12 @@
-<?php namespace SuperV\Modules\Supreme\Domains\Server\Manifests;
+<?php namespace SuperV\Modules\Supreme\Domains\Server\Model;
 
-use SuperV\Modules\Supreme\Domains\Server\Model\ServerModel;
-use SuperV\Modules\Supreme\Domains\Server\Model\Servers;
 use SuperV\Modules\Supreme\Domains\Server\Table\ServerTableBuilder;
 use SuperV\Platform\Domains\Manifest\ModelManifest;
 use SuperV\Platform\Domains\UI\Form\FormBuilder;
 
 class ServerManifest extends ModelManifest
 {
-    protected $model = ServerModel::class;
+//    protected $model = ServerModel::class;
 
     public function getPages()
     {
