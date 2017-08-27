@@ -1,5 +1,6 @@
 <?php namespace SuperV\Modules\Supreme\Domains\Server\Model\Entry;
 
+use SuperV\Modules\Supreme\Domains\Server\Model\AccountModel;
 use SuperV\Platform\Domains\Entry\EntryModel;
 
 class ServerEntryModel extends EntryModel
@@ -14,7 +15,7 @@ class ServerEntryModel extends EntryModel
         'ip:text|required',
         'port:integer|max:100',
         'account:relation|required' => [
-            'related'  => 'SuperV\Modules\Supreme\Domains\Server\Model\AccountModel',
+            'related'  => AccountModel::class,
             'multiple' => false,
             'expanded' => false,
         ],
