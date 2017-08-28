@@ -13,6 +13,7 @@ class ServiceManifest extends ModelManifest
         return [
             'index'   => [
                 'navigation' => true,
+                'icon' => 'cogs',
                 'title'      => 'Services',
                 'route'      => 'acp@supreme::services.index',
                 'url'        => 'supreme/services',

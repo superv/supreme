@@ -13,6 +13,7 @@ class ServerManifest extends ModelManifest
         return [
             'index'  => [
                 'navigation' => true,
+                'icon' => 'server',
                 'title'      => 'Servers',
                 'route'      => 'acp@supreme::servers.index',
                 'url'        => 'supreme/servers',
@@ -28,7 +29,6 @@ class ServerManifest extends ModelManifest
             ],
             'create' => [
                 'navigation' => true,
-                'icon'       => 'plus',
                 'title'      => 'New Server',
                 'route'      => 'acp@supreme::servers.create',
                 'url'        => 'supreme/servers/create',
