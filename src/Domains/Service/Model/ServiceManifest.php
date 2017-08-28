@@ -18,7 +18,7 @@ class ServiceManifest extends ModelManifest
                 'url'        => 'supreme/services',
                 'handler'    => function (TableBuilder $builder) {
                     $builder->setModel(ServiceModel::class)
-                            ->setButtons(['edit']);
+                            ->setButtons(['edit','delete']);
 
                     return $builder->render();
                 },
@@ -28,7 +28,7 @@ class ServiceManifest extends ModelManifest
             ],
             'create'  => [
                 'navigation' => true,
-                'title'      => 'Add New Service',
+                'title'      => 'New Service',
                 'route'      => 'acp@supreme::services.create',
                 'url'        => 'supreme/services/create',
                 'handler'    => function (FormBuilder $builder, ServiceModel $service) {

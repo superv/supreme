@@ -17,7 +17,7 @@ class ServiceModel extends ServiceEntryModel
         return $this->agent;
     }
 
-    public function getPossibleAgents()
+    public function getAgentOptions()
     {
         return DropletModel::where('type', 'agent')->get();
     }

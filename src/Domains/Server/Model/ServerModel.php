@@ -15,7 +15,7 @@ class ServerModel extends ServerEntryModel
         return $this->hasMany(ServiceModel::class, 'server_id');
     }
 
-    public function ip()
+    public function getIpAddress()
     {
         return $this->ip;
     }
