@@ -28,7 +28,6 @@ class ServiceManifest extends ModelManifest
                 ],
             ],
             'create'  => [
-                'navigation' => true,
                 'title'      => 'New Service',
                 'route'      => 'acp@supreme::services.create',
                 'url'        => 'supreme/services/create',
@@ -38,15 +37,6 @@ class ServiceManifest extends ModelManifest
                 'buttons'    => [
                     'index',
                 ],
-            ],
-            'delete'  => [
-                'route'   => 'acp@hosting::services.delete',
-                'url'     => 'supreme/services/{service}/delete',
-                'handler' => function (ServiceModel $service) {
-//                    $service->delete();
-
-                    return redirect()->route('acp@supreme::services.index');
-                },
             ],
             'install' => [
                 'url'     => 'supreme/services/{id}/install',
@@ -66,15 +56,6 @@ class ServiceManifest extends ModelManifest
                         'text'  => 'Install Server',
                         'href'  => 'supreme/services/{entry.id}/install',
                         'class' => 'remote',
-                    ],
-                ],
-                'tabs'    => [
-                    'ajax'    => true,
-                    'details' => [
-                        'label'   => 'Service Details',
-                        'handler' => function (FormBuilder $builder, Services $services, $id) {
-                            return $builder->render($services->find($id));
-                        },
                     ],
                 ],
             ],

@@ -28,7 +28,6 @@ class ServerManifest extends ModelManifest
                 ],
             ],
             'create' => [
-                'navigation' => true,
                 'title'      => 'New Server',
                 'route'      => 'acp@supreme::servers.create',
                 'url'        => 'supreme/servers/create',
