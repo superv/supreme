@@ -46,6 +46,9 @@ class ServerManifest extends ModelManifest
                 'handler' => function (FormBuilder $builder, ServerModel $server) {
                     return $builder->render($server);
                 },
+                'buttons' => [
+                    'add_service'
+                ]
             ],
         ];
     }

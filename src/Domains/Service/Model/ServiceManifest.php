@@ -39,7 +39,6 @@ class ServiceManifest extends ModelManifest
                 ],
             ],
             'delete'  => [
-                'title' => 'Delete Service',
                 'route'   => 'acp@hosting::services.delete',
                 'url'     => 'supreme/services/{service}/delete',
                 'handler' => function (ServiceModel $service) {
