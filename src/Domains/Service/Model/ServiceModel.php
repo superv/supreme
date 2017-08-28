@@ -1,8 +1,8 @@
 <?php namespace SuperV\Modules\Supreme\Domains\Service\Model;
 
 use SuperV\Modules\Supreme\Domains\Server\Model\ServerModel;
+use SuperV\Modules\Supreme\Model\Entry\ServiceEntryModel;
 use SuperV\Platform\Domains\Droplet\Model\DropletModel;
-use SuperV\Platform\Domains\Droplet\Model\Droplets;
 
 class ServiceModel extends ServiceEntryModel
 {

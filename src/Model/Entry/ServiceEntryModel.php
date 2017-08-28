@@ -1,4 +1,4 @@
-<?php namespace SuperV\Modules\Supreme\Domains\Service\Model;
+<?php namespace SuperV\Modules\Supreme\Model\Entry;
 
 use SuperV\Modules\Supreme\Domains\Server\Model\ServerModel;
 use SuperV\Platform\Domains\Droplet\Model\DropletModel;
@@ -23,9 +23,4 @@ class ServiceEntryModel extends EntryModel
     ];
 
     protected $relationships = ['server', 'agent'];
-//
-//    public function getAttribute($key)
-//    {
-//        parent::getAttribute($key);
-//    }
 }
