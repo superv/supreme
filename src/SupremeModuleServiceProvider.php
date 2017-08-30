@@ -23,7 +23,7 @@ class SupremeModuleServiceProvider extends DropletServiceProvider
     ];
 
     protected $singletons = [
-        Services::class,
+        Services::class.'~services',
         Servers::class,
         Accounts::class,
     ];
