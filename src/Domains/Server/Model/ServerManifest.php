@@ -15,7 +15,7 @@ class ServerManifest extends ModelManifest
                 'navigation' => true,
                 'icon' => 'server',
                 'title'      => 'Servers',
-                'route'      => 'acp@supreme::servers.index',
+                'route'      => 'supreme::servers.index',
                 'url'        => 'supreme/servers',
                 'handler'    => function (TableBuilder $builder) {
 
@@ -29,7 +29,7 @@ class ServerManifest extends ModelManifest
             ],
             'create' => [
                 'title'      => 'New Server',
-                'route'      => 'acp@supreme::servers.create',
+                'route'      => 'supreme::servers.create',
                 'url'        => 'supreme/servers/create',
                 'handler'    => function (FormBuilder $builder, ServerModel $server) {
                     return $builder->render($server);
@@ -40,7 +40,7 @@ class ServerManifest extends ModelManifest
             ],
             'edit'   => [
                 'title'   => 'Update Server Details',
-                'route'   => 'acp@supreme::servers.edit',
+                'route'   => 'supreme::servers.edit',
                 'url'     => 'supreme/servers/{server}/edit',
                 'handler' => function (FormBuilder $builder, ServerModel $server) {
                     return $builder->render($server);

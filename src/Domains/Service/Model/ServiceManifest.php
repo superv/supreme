@@ -15,7 +15,7 @@ class ServiceManifest extends ModelManifest
                 'navigation' => true,
                 'icon' => 'cogs',
                 'title'      => 'Services',
-                'route'      => 'acp@supreme::services.index',
+                'route'      => 'supreme::services.index',
                 'url'        => 'supreme/services',
                 'handler'    => function (TableBuilder $builder) {
                     $builder->setModel(ServiceModel::class)
@@ -29,7 +29,7 @@ class ServiceManifest extends ModelManifest
             ],
             'create'  => [
                 'title'      => 'New Service',
-                'route'      => 'acp@supreme::services.create',
+                'route'      => 'supreme::services.create',
                 'url'        => 'supreme/services/create',
                 'handler'    => function (FormBuilder $builder, ServiceModel $service) {
                     return $builder->render($service);
@@ -44,7 +44,7 @@ class ServiceManifest extends ModelManifest
             ],
             'edit'    => [
                 'title'   => 'Edit Service',
-                'route'   => 'acp@supreme::service.edit',
+                'route'   => 'supreme::service.edit',
                 'url'     => 'supreme/services/{id}/edit',
                 'handler' => function (FormBuilder $builder, Services $services, $id) {
                     return $builder->render($services->find($id));
