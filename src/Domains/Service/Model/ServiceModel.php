@@ -10,11 +10,26 @@ class ServiceModel extends ServiceEntryModel
     {
         return $this->hasOne(DropletModel::class, 'id', 'agent_id');
     }
+    
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function getType()
+    {
+        return $this->type;
+    }
 
     /** @return DropletModel */
     public function getAgent()
     {
         return $this->agent;
+    }
+
+    public function getAgentId()
+    {
+        return $this->agent_id;
     }
 
     public function getAgentOptions()
@@ -31,5 +46,10 @@ class ServiceModel extends ServiceEntryModel
     public function getServer()
     {
         return $this->server;
+    }
+
+    public function getServerId()
+    {
+        return $this->server_id;
     }
 }
