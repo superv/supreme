@@ -43,7 +43,7 @@ class RunServerScriptJob extends Job
 
     public function fromStub($stub, $tokens)
     {
-        $script = superv(ScriptBuilder::class)->build($stub, $tokens);
+        $script = app(ScriptBuilder::class)->build($stub, $tokens);
 
         return $this->setScript($script);
     }
