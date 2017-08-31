@@ -20,7 +20,7 @@ class ServerManifest extends ModelManifest
                 'handler'    => function (TableBuilder $builder) {
 
                     return $builder->setModel(ServerModel::class)
-                                   ->setButtons(['edit', 'delete'])
+                                   ->setButtons(['delete','edit'])
                                    ->render();
                 },
                 'buttons'    => [

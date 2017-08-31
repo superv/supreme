@@ -19,7 +19,7 @@ class ServiceManifest extends ModelManifest
                 'url'        => 'supreme/services',
                 'handler'    => function (TableBuilder $builder) {
                     $builder->setModel(ServiceModel::class)
-                            ->setButtons(['edit','delete']);
+                            ->setButtons(['delete','edit']);
 
                     return $builder->render();
                 },
@@ -45,9 +45,9 @@ class ServiceManifest extends ModelManifest
             'edit'    => [
                 'title'   => 'Edit Service',
                 'route'   => 'supreme::service.edit',
-                'url'     => 'supreme/services/{id}/edit',
-                'handler' => function (FormBuilder $builder, Services $services, $id) {
-                    return $builder->render($services->find($id));
+                'url'     => 'supreme/services/{service}/edit',
+                'handler' => function (FormBuilder $builder, ServiceModel $service) {
+                    return $builder->render($service);
                 },
                 'buttons' => [
                     'create',
