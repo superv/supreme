@@ -9,6 +9,11 @@ class ServerModel extends ServerEntryModel
     {
         return $this->hasOne(AccountModel::class, 'id', 'account_id');
     }
+    
+    public function getAccount()
+    {
+        return $this->account;
+    }
 
     public function services()
     {
