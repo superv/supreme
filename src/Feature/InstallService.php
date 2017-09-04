@@ -27,7 +27,7 @@ class InstallService extends Feature
         $agent = Droplet::from($service->getAgent());
 
         $task = $builder->setTitle("Install " . $service->getName() )->setPayload([
-                'service_id' => $service->getId(),
+                'server_id' => $service->getServerId(),
                 'feature'    => $agent->getFeature('install'),
             ])->build();
 

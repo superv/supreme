@@ -1,41 +1,37 @@
 <?php namespace SuperV\Modules\Supreme\Domains\Server\Jobs;
 
 use SuperV\Modules\Supreme\Domains\Script\StubBuilder;
-use SuperV\Modules\Supreme\Domains\Server\Model\ServerModel;
-use SuperV\Modules\Supreme\Domains\Server\Remote;
+use SuperV\Modules\Supreme\Domains\Server\Server;
 use SuperV\Platform\Domains\Task\Job;
 
 class RunServerScriptJob extends Job
 {
+    protected $script;
+
     /**
-       * @var ServerModel
-       */
-      protected $server;
+     * @var Server
+     */
+    private $server;
 
-      protected $script;
-
-      public function __construct(ServerModel $server)
-      {
-          $this->server = $server;
-      }
-
-      public function script($script)
-      {
-          $this->script = $script;
-      }
-
-      public function stub($stub, $tokens)
-      {
-          $this->script = app(StubBuilder::class)->build($stub, $tokens);
-
-          return $this;
-      }
-
-    public function handle(Remote $remote)
+    public function __construct(Server $server)
     {
-        return $remote->onServer($this->server)
-                      ->setListener($this->getListener())
-                      ->setScript($this->script)
-                      ->execute();
+        $this->server = $server;
+    }
+
+    public function script($script)
+    {
+        $this->script = $script;
+    }
+
+    public function stub($stub, $tokens)
+    {
+        $this->script = app(StubBuilder::class)->build($stub, $tokens);
+
+        return $this;
+    }
+
+    public function handle()
+    {
+        return $this->server->execute($this->script, $this->listener)->forceSuccess();
     }
 }

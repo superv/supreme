@@ -1,6 +1,7 @@
 <?php namespace SuperV\Modules\Supreme;
 
 use SuperV\Modules\Supreme\Console\MakeService;
+use SuperV\Modules\Supreme\Domains\Drop\Model\Drops;
 use SuperV\Modules\Supreme\Domains\Server\Model\Accounts;
 use SuperV\Modules\Supreme\Domains\Server\Model\Servers;
 use SuperV\Modules\Supreme\Domains\Server\Process;
@@ -23,13 +24,13 @@ class SupremeModuleServiceProvider extends DropletServiceProvider
     ];
 
     protected $singletons = [
-        'services' =>Services::class,
-        'servers'      => Servers::class,
+        'services' => Services::class,
+        'servers'  => Servers::class,
+        'drops'    => Drops::class,
         Accounts::class,
     ];
 
     protected $bindings = [
         Process::class => SymfonyProcess::class,
     ];
-
 }
