@@ -46,6 +46,7 @@ class ServerManifest extends ModelManifest
                     return $builder->render($server);
                 },
                 'buttons' => [
+                    'index',
                     'add_service'
                 ]
             ],

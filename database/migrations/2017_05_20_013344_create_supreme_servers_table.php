@@ -20,6 +20,7 @@ class CreateSupremeServersTable extends Migration
             $table->string('slug');
             $table->string('ip');
             $table->integer('port');
+            $table->string('distribution');
             $table->nullableTimestamps();
 
             $table->unique('slug');

@@ -24,6 +24,11 @@ class ServerModel extends ServerEntryModel
     {
         return $this->ip;
     }
+
+    public function getDistribution()
+    {
+        return $this->distribution;
+    }
 }
 
 
