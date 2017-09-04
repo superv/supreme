@@ -1,7 +1,6 @@
 <?php namespace SuperV\Modules\Supreme\Domains\Server;
 
 use InvalidArgumentException;
-use SuperV\Modules\Supreme\Domains\Script\Script;
 use SuperV\Modules\Supreme\Domains\Server\Model\ServerModel;
 
 class Remote
@@ -100,25 +99,6 @@ class Remote
         }
     }
 
-    public function config($key = null, $value = null)
-    {
-        $configFile = '/usr/local/superv/.superv';
-        if (!$this->fileExists('/usr/local/superv/.superv')) {
-            $this->mkdirR(dirname($configFile));
-            $this->saveToFile('{}', $configFile);
-        }
-        $config = json_decode($this->getFile($configFile), true);
-
-        if ($value) {
-            array_set($config, $key, $value);
-            $this->saveToFile(json_encode($config, JSON_PRETTY_PRINT), '/usr/local/superv/.superv');
-
-            return $this;
-        }
-
-        return $key ? array_get($config, $key) : $config;
-    }
-
     public function output()
     {
         return $this->output;
@@ -183,136 +163,159 @@ class Remote
         return $this;
     }
 
-    protected function makeScript($template, $tokens)
-    {
-        return (new Script($template))
-            ->setTokens($tokens)
-            ->setLocal(false)
-            ->make()
-            ->getTemplate();
+    public function config($key = null, $value = null) {
+
     }
+//
+//    public function config($key = null, $value = null)
+//      {
+//          $configFile = '/usr/local/superv/.superv';
+//          if (!$this->fileExists('/usr/local/superv/.superv')) {
+//              $this->mkdirR(dirname($configFile));
+//              $this->saveToFile('{}', $configFile);
+//          }
+//          $config = json_decode($this->getFile($configFile), true);
+//
+//          if ($value) {
+//              array_set($config, $key, $value);
+//              $this->saveToFile(json_encode($config, JSON_PRETTY_PRINT), '/usr/local/superv/.superv');
+//
+//              return $this;
+//          }
+//
+//          return $key ? array_get($config, $key) : $config;
+//      }
 
-    protected function runScript($template, $tokens)
-    {
-        return $this->setScript($this->makeScript($template, $tokens));
-    }
+//    protected function makeScript($template, $tokens)
+//    {
+//        return (new Script($template))
+//            ->setTokens($tokens)
+//            ->setLocal(false)
+//            ->make()
+//            ->getTemplate();
+//    }
+//
+//    protected function runScript($template, $tokens)
+//    {
+//        return $this->setScript($this->makeScript($template, $tokens));
+//    }
+//
+//    public function fileExists($path)
+//    {
+//        $script = $this->makeScript('CheckFileExists', ['path' => $path]);
+//
+//        return $this->setScript($script)->execute()->success();
+//    }
+//
+//    public function getFile($file)
+//    {
+//        $this->setScript("cat {$file}");
+//
+//        return $this->output();
+//    }
 
-    public function fileExists($path)
-    {
-        $script = $this->makeScript('CheckFileExists', ['path' => $path]);
-
-        return $this->setScript($script)->execute()->success();
-    }
-
-    public function getFile($file)
-    {
-        $this->setScript("cat {$file}");
-
-        return $this->output();
-    }
-
-    public function saveToFile($content, $file)
-    {
-        $result = $this->runScript('SaveToFile', [
-            'content' => $content,
-            'file'    => $file,
-        ]);
-
-        if (!$result->success()) {
-            throw new \Exception($result->output());
-        }
-
-        return true;
-    }
-
-    public function symlink($what, $where)
-    {
-        return $this->run("ln -s {$what} {$where}");
-    }
-
-    public function run($command)
-    {
-        $result = $this->runScript('RunCommand', [
-            'command' => $command,
-        ]);
-
-        if (!$result->success()) {
-            throw new \Exception($result->output());
-        }
-
-        return $result;
-    }
-
-    public function delete($what)
-    {
-        return $this->run("rm {$what}");
-    }
-
-    public function chownR($target, $user, $group = null)
-    {
-        return $this->chown($target, $user, $group, true);
-    }
-
-    public function chown($target, $user, $group = null, $recursive = false)
-    {
-        return $this->run("chown " . ($recursive ? '-R' : '') . " {$user}:" . ($group ? ':' . $group : '') . " {$target}");
-    }
-
-    public function chmodR($target, $permissions)
-    {
-        return $this->chmod($target, $permissions, true);
-    }
-
-    public function chmod($target, $permissions, $recursive = false)
-    {
-        return $this->run("chmod " . ($recursive ? '-R' : '') . " {$permissions} {$target}");
-    }
-
-    public function deleteDirectory($user, $directory)
-    {
-        $dir = "/home/{$user}/{$directory}";
-
-        return $this->run("rm -Rf {$dir}");
-    }
-
-    public function mkdirR($directory, $perms = null)
-    {
-        $this->mkdir($directory, $perms, true);
-    }
-
-    public function mkdir($directory, $perms = null, $recursive = true)
-    {
-        $this->run("mkdir " . ($recursive ? '-p' : '') . " {$directory}");
-        if ($perms) {
-            $this->chmod($directory, $perms);
-        }
-    }
-
-    public function addUser($user, $password)
-    {
-        $result = $this->runScript('AddSystemUser', [
-            'user'     => $user,
-            'password' => $password,
-        ]);
-
-        if (!$result->success()) {
-            throw new \Exception($result->output());
-        }
-
-        return true;
-    }
-
-    public function addToGroup($user, $group)
-    {
-        $result = $this->runScript('AddUserToGroup', [
-            'user'  => $user,
-            'group' => $group,
-        ]);
-
-        if (!$result->success()) {
-            throw new \Exception($result->output());
-        }
-
-        return true;
-    }
+//    public function saveToFile($content, $file)
+//    {
+//        $result = $this->runScript('SaveToFile', [
+//            'content' => $content,
+//            'file'    => $file,
+//        ]);
+//
+//        if (!$result->success()) {
+//            throw new \Exception($result->output());
+//        }
+//
+//        return true;
+//    }
+//
+//    public function symlink($what, $where)
+//    {
+//        return $this->run("ln -s {$what} {$where}");
+//    }
+//
+//    public function run($command)
+//    {
+//        $result = $this->runScript('RunCommand', [
+//            'command' => $command,
+//        ]);
+//
+//        if (!$result->success()) {
+//            throw new \Exception($result->output());
+//        }
+//
+//        return $result;
+//    }
+//
+//    public function delete($what)
+//    {
+//        return $this->run("rm {$what}");
+//    }
+//
+//    public function chownR($target, $user, $group = null)
+//    {
+//        return $this->chown($target, $user, $group, true);
+//    }
+//
+//    public function chown($target, $user, $group = null, $recursive = false)
+//    {
+//        return $this->run("chown " . ($recursive ? '-R' : '') . " {$user}:" . ($group ? ':' . $group : '') . " {$target}");
+//    }
+//
+//    public function chmodR($target, $permissions)
+//    {
+//        return $this->chmod($target, $permissions, true);
+//    }
+//
+//    public function chmod($target, $permissions, $recursive = false)
+//    {
+//        return $this->run("chmod " . ($recursive ? '-R' : '') . " {$permissions} {$target}");
+//    }
+//
+//    public function deleteDirectory($user, $directory)
+//    {
+//        $dir = "/home/{$user}/{$directory}";
+//
+//        return $this->run("rm -Rf {$dir}");
+//    }
+//
+//    public function mkdirR($directory, $perms = null)
+//    {
+//        $this->mkdir($directory, $perms, true);
+//    }
+//
+//    public function mkdir($directory, $perms = null, $recursive = true)
+//    {
+//        $this->run("mkdir " . ($recursive ? '-p' : '') . " {$directory}");
+//        if ($perms) {
+//            $this->chmod($directory, $perms);
+//        }
+//    }
+//
+//    public function addUser($user, $password)
+//    {
+//        $result = $this->runScript('AddSystemUser', [
+//            'user'     => $user,
+//            'password' => $password,
+//        ]);
+//
+//        if (!$result->success()) {
+//            throw new \Exception($result->output());
+//        }
+//
+//        return true;
+//    }
+//
+//    public function addToGroup($user, $group)
+//    {
+//        $result = $this->runScript('AddUserToGroup', [
+//            'user'  => $user,
+//            'group' => $group,
+//        ]);
+//
+//        if (!$result->success()) {
+//            throw new \Exception($result->output());
+//        }
+//
+//        return true;
+//    }
 }

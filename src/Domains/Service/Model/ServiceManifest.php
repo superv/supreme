@@ -7,19 +7,23 @@ use SuperV\Platform\Domains\UI\Table\TableBuilder;
 
 class ServiceManifest extends ModelManifest
 {
+    protected $routeKeyName = 'service';
 
     public function getPages()
     {
         return [
             'index'   => [
                 'navigation' => true,
-                'icon' => 'cogs',
+                'icon'       => 'cogs',
                 'title'      => 'Services',
                 'route'      => 'supreme::services.index',
                 'url'        => 'supreme/services',
                 'handler'    => function (TableBuilder $builder) {
                     $builder->setModel(ServiceModel::class)
-                            ->setButtons(['delete','edit']);
+                            ->setButtons([
+                                'delete',
+                                'edit',
+                            ]);
 
                     return $builder->render();
                 },
@@ -28,19 +32,19 @@ class ServiceManifest extends ModelManifest
                 ],
             ],
             'create'  => [
-                'title'      => 'New Service',
-                'route'      => 'supreme::services.create',
-                'url'        => 'supreme/services/create',
-                'handler'    => function (FormBuilder $builder, ServiceModel $service) {
+                'title'   => 'New Service',
+                'route'   => 'supreme::services.create',
+                'url'     => 'supreme/services/create',
+                'handler' => function (FormBuilder $builder, ServiceModel $service) {
                     return $builder->render($service);
                 },
-                'buttons'    => [
+                'buttons' => [
                     'index',
                 ],
             ],
             'install' => [
                 'url'     => 'supreme/services/{id}/install',
-                'handler' => InstallService::class . "@handle",
+                'handler' => InstallService::class."@handle",
             ],
             'edit'    => [
                 'title'   => 'Edit Service',
@@ -50,6 +54,7 @@ class ServiceManifest extends ModelManifest
                     return $builder->render($service);
                 },
                 'buttons' => [
+                    'index',
                     'create',
                     'delete'      => ['confirm' => true],
                     'install_dns' => [

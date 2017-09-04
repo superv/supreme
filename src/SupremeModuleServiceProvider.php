@@ -23,18 +23,13 @@ class SupremeModuleServiceProvider extends DropletServiceProvider
     ];
 
     protected $singletons = [
-        Services::class.'~services',
-        Servers::class,
+        'services' =>Services::class,
+        'servers'      => Servers::class,
         Accounts::class,
     ];
 
     protected $bindings = [
         Process::class => SymfonyProcess::class,
-        'services'     => Services::class,
-        'servers'      => Servers::class,
     ];
 
-    protected $manifests = [
-        SupremeManifest::class,
-    ];
 }
