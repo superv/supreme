@@ -19,6 +19,7 @@ class CreateSupremeDropsTable extends Migration
             $table->unsignedInteger('server_id');
             $table->unsignedInteger('service_id');
             $table->string('context');
+            $table->nullableMorphs('related');
             $table->timestamps();
         });
     }
