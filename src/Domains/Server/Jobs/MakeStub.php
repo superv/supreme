@@ -10,7 +10,7 @@ class MakeStub
 
     private $params;
 
-    public function __construct($stub, $params)
+    public function __construct($stub, $params = [])
     {
         $this->stub = $stub;
         $this->params = $params;
