@@ -104,11 +104,12 @@ class Server
         }
     }
 
-    public function addUser($user, $password)
+    public function addUser($user, $password, $home = null)
     {
         $script = $this->fromStub('add_user', [
             'user'     => $user,
             'password' => $password,
+            'home'     => $home ?? "/home/{$user}",
         ]);
 
         return $this->execute($script)
@@ -125,29 +126,36 @@ class Server
     {
         $script = $this->fromStub('save_to_file', [
             'content' => $content,
-            'target'    => $target,
+            'target'  => $target,
         ]);
 
         return $this->execute($script)
                     ->forceSuccess();
     }
 
-        public function config($key = null, $value = null)
-          {
-              $configFile = '/usr/local/superv/.superv';
-              if (!$this->fileExists('/usr/local/superv/.superv')) {
-                  $this->mkdirR(dirname($configFile));
-                  $this->saveToFile('{}', $configFile);
-              }
-              $config = json_decode($this->getFile($configFile), true);
+    public function saveStubToFile($stub, $target, $tokens)
+    {
+        $content = $this->fromStub($stub, $tokens);
 
-              if ($value) {
-                  array_set($config, $key, $value);
-                  $this->saveToFile(json_encode($config, JSON_PRETTY_PRINT), '/usr/local/superv/.superv');
+        return $this->saveToFile($content, $target);
+    }
 
-                  return $this;
-              }
+    public function config($key = null, $value = null)
+    {
+        $configFile = '/usr/local/superv/.superv';
+        if (! $this->fileExists('/usr/local/superv/.superv')) {
+            $this->mkdirR(dirname($configFile));
+            $this->saveToFile('{}', $configFile);
+        }
+        $config = json_decode($this->getFile($configFile), true);
 
-              return $key ? array_get($config, $key) : $config;
-          }
+        if ($value) {
+            array_set($config, $key, $value);
+            $this->saveToFile(json_encode($config, JSON_PRETTY_PRINT), '/usr/local/superv/.superv');
+
+            return $this;
+        }
+
+        return $key ? array_get($config, $key) : $config;
+    }
 }
