@@ -20,6 +20,14 @@ class ServiceManifest extends ModelManifest
                 'url'        => 'supreme/services',
                 'handler'    => function (TableBuilder $builder) {
                     $builder->setModel(ServiceModel::class)
+                            ->setColumns([
+                                'id',
+                                'entry.agent.name',
+                                'entry.server.name',
+                                'name',
+                                'slug',
+                                'type'
+                            ])
                             ->setButtons([
                                 'delete',
                                 'edit',

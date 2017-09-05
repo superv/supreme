@@ -15,11 +15,14 @@ class CreateSupremeDropsTable extends Migration
     {
         Schema::create('supreme_drops', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('status');
             $table->unsignedInteger('server_id');
-            $table->unsignedInteger('service_id');
-            $table->string('context');
+            $table->unsignedInteger('agent_id');
             $table->nullableMorphs('related');
+            $table->string('context');
+            $table->string('name');
+            $table->string('service_type');
+            $table->string('status');
+
             $table->timestamps();
         });
     }
