@@ -7,6 +7,8 @@ use SuperV\Platform\Domains\UI\Table\TableBuilder;
 
 class ServiceManifest extends ModelManifest
 {
+    protected $port = 'acp';
+
     protected $routeKeyName = 'service';
 
     public function getPages()

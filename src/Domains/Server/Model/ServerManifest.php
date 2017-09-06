@@ -8,19 +8,21 @@ class ServerManifest extends ModelManifest
 {
 //    protected $model = ServerModel::class;
 
+    protected $port = 'acp';
+
     public function getPages()
     {
         return [
             'index'  => [
                 'navigation' => true,
-                'icon' => 'server',
+                'icon'       => 'server',
                 'title'      => 'Servers',
                 'route'      => 'supreme::servers.index',
                 'url'        => 'supreme/servers',
                 'handler'    => function (TableBuilder $builder) {
 
                     return $builder->setModel(ServerModel::class)
-                                   ->setButtons(['delete','edit'])
+                                   ->setButtons(['delete', 'edit'])
                                    ->render();
                 },
                 'buttons'    => [
@@ -28,13 +30,13 @@ class ServerManifest extends ModelManifest
                 ],
             ],
             'create' => [
-                'title'      => 'New Server',
-                'route'      => 'supreme::servers.create',
-                'url'        => 'supreme/servers/create',
-                'handler'    => function (FormBuilder $builder, ServerModel $server) {
+                'title'   => 'New Server',
+                'route'   => 'supreme::servers.create',
+                'url'     => 'supreme/servers/create',
+                'handler' => function (FormBuilder $builder, ServerModel $server) {
                     return $builder->render($server);
                 },
-                'buttons'    => [
+                'buttons' => [
                     'index',
                 ],
             ],
@@ -47,8 +49,8 @@ class ServerManifest extends ModelManifest
                 },
                 'buttons' => [
                     'index',
-                    'add_service'
-                ]
+                    'add_service',
+                ],
             ],
         ];
     }
