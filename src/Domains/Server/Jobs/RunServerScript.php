@@ -4,7 +4,7 @@ use SuperV\Modules\Supreme\Domains\Script\StubBuilder;
 use SuperV\Modules\Supreme\Domains\Server\Server;
 use SuperV\Platform\Domains\Task\Job;
 
-class RunServerScriptJob extends Job
+class RunServerScript extends Job
 {
     protected $script;
 
@@ -13,9 +13,10 @@ class RunServerScriptJob extends Job
      */
     private $server;
 
-    public function __construct(Server $server)
+    public function __construct(Server $server, $script = null)
     {
         $this->server = $server;
+        $this->script = $script;
     }
 
     public function script($script)
