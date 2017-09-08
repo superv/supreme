@@ -5,6 +5,8 @@ use SuperV\Platform\Domains\Entry\EntryModel;
 
 class ServerEntryModel extends EntryModel
 {
+    public static $routeKeyname = 'server';
+
     protected $table = 'supreme_servers';
 
     protected $relationships = ['account'];

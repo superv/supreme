@@ -6,6 +6,8 @@ use SuperV\Platform\Domains\Entry\EntryModel;
 
 class ServiceEntryModel extends EntryModel
 {
+    public static $routeKeyname = 'service';
+
     protected $table = 'supreme_services';
 
     protected $fields = [
