@@ -97,7 +97,11 @@ class ServerManifest
                     },
                     'buttons' => [
                         'index',
-                        'create',
+                        'create' => [
+                            'route'       => 'supreme::services.create',
+                            'data-toggle' => 'modal',
+                            'data-target' => '#modal',
+                        ],
                     ],
                 ],
             ],

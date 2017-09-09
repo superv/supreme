@@ -39,6 +39,7 @@ class ServiceManifest
                     ]
                 ],
                 'create'  => [
+                    'ajax' => true,
                     'title'   => 'New Service',
                     'route'   => 'supreme::services.create',
                     'url'     => 'supreme/services/create',
