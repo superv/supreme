@@ -15,7 +15,7 @@ class SupremeModule extends Module
     protected $icon = 'superpowers';
 
     protected $manifests = [
-        ServerManifest::class,
+//        ServerManifest::class,
         ServiceManifest::class,
     ];
 }

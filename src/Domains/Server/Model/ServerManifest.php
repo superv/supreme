@@ -64,7 +64,7 @@ class ServerManifest
                     'route'   => 'supreme::servers.edit.details',
                     'url'     => 'supreme/servers/{server}/edit',
                     'handler' => function (FormBuilder $builder, ServerModel $entry) {
-                        return $builder->render($entry);
+                        return $builder->setAjax(true)->render($entry);
                     },
                     'buttons' => [
                         'delete',
