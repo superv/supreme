@@ -13,8 +13,8 @@ class ServerManifest
                     'navigation' => true,
                     'icon'       => 'server',
                     'title'      => 'Servers',
-                    'route'      => 'supreme::servers.index',
-                    'url'        => 'supreme/servers',
+                    'route'      => 'supreme::servers.index2',
+                    'url'        => 'supreme/servers2',
                     'handler'    => function (TableBuilder $builder) {
                         return $builder->setModel(ServerModel::class)
                                        ->setButtons([
