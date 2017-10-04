@@ -7,6 +7,8 @@ class ServerEntryModel extends EntryModel
 {
     public static $routeKeyname = 'server';
 
+    protected $modelSlug = 'server';
+
     protected $table = 'supreme_servers';
 
     protected $relationships = ['account'];
