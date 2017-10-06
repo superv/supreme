@@ -7,7 +7,8 @@ class ServerModel extends ServerEntryModel
 {
     public function account()
     {
-        return $this->hasOne(AccountModel::class, 'id', 'account_id');
+        return $this->belongsTo(AccountModel::class, 'account_id');
+//        return $this->hasOne(AccountModel::class, 'id', 'account_id');
     }
     
     public function getAccount()
