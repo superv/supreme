@@ -3,11 +3,9 @@
 use SuperV\Modules\Supreme\Domains\Service\Model\ServiceModel;
 use SuperV\Modules\Supreme\Domains\Service\Model\Services;
 use SuperV\Platform\Domains\Droplet\Agent\Agent;
-use SuperV\Platform\Domains\Droplet\Droplet;
+use SuperV\Platform\Domains\Droplet\DropletFactory;
 use SuperV\Platform\Domains\Feature\Feature;
-use SuperV\Platform\Domains\Task\Deployer;
 use SuperV\Platform\Domains\Task\Jobs\DeployTask;
-use SuperV\Platform\Domains\Task\Model\Tasks;
 use SuperV\Platform\Domains\Task\TaskBuilder;
 
 class InstallService extends Feature
@@ -19,17 +17,17 @@ class InstallService extends Feature
     public function handle(Services $services, TaskBuilder $builder)
     {
         /** @var ServiceModel $service */
-        if (!$service = $services->find(request()->route('id'))) {
+        if (! $service = $services->find(request()->route('id'))) {
             throw new \Exception('Service not found');
         }
 
         /** @var Agent $agent */
-        $agent = Droplet::from($service->getAgent());
+        $agent = app(DropletFactory::class)->create($service->getAgent());
 
-        $task = $builder->setTitle("Install " . $service->getName() )->setPayload([
-                'server_id' => $service->getServerId(),
-                'feature'    => $agent->getFeature('install'),
-            ])->build();
+        $task = $builder->setTitle("Install ".$service->getName())->setPayload([
+            'server_id' => $service->getServerId(),
+            'feature'   => $agent->getFeature('install'),
+        ])->build();
 
         $this->dispatch(new DeployTask($task));
 

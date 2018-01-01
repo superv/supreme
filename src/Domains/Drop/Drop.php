@@ -5,6 +5,7 @@ namespace SuperV\Modules\Supreme\Domains\Drop;
 use SuperV\Modules\Supreme\Domains\Drop\Model\DropModel;
 use SuperV\Platform\Domains\Droplet\Agent\Agent;
 use SuperV\Platform\Domains\Droplet\Droplet;
+use SuperV\Platform\Domains\Droplet\DropletFactory;
 
 class Drop
 {
@@ -19,7 +20,7 @@ class Drop
     /** @return Agent */
     public function agent()
     {
-        return Droplet::from($this->model->getAgent());
+        return app(DropletFactory::class)->create($this->model->getAgent());
     }
 
     public function getId()
