@@ -12,8 +12,8 @@ class SupervModulesSupremeCreateAccountStruct extends Migration
             $fields->string('name')->setLabel('Account Name');
             $fields->string('slug')->setLabel('Account Slug')->setUnique();
             $fields->string('username')->setLabel('Username')->setRules('alphanum');
-            $fields->text('private_key')->setLabel('Private Key');
-            $fields->text('public_key')->setLabel('Public Key');
+            $fields->text('private_key')->setLabel('Private Key')->nullable();
+            $fields->text('public_key')->setLabel('Public Key')->nullable();
         });
     }
 
