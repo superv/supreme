@@ -1,7 +1,7 @@
 <?php namespace SuperV\Modules\Supreme\Model\Entry;
 
 use SuperV\Modules\Supreme\Domains\Server\Model\ServerModel;
-use SuperV\Platform\Domains\Droplet\Model\DropletModel;
+use SuperV\Platform\Domains\Droplet\Droplet;
 use SuperV\Platform\Domains\Entry\EntryModel;
 
 class ServiceEntryModel extends EntryModel
@@ -19,7 +19,7 @@ class ServiceEntryModel extends EntryModel
             'multiple' => false,
         ],
         'agent:relation|required'  => [
-            'related'  => DropletModel::class,
+            'related'  => Droplet::class,
             'multiple' => false,
         ],
     ];

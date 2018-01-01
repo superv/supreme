@@ -22,7 +22,7 @@ class InstallService extends Feature
         }
 
         /** @var Agent $agent */
-        $agent = app(DropletFactory::class)->create($service->getAgent());
+        $agent = new Agent($service->getAgent()->toArray());
 
         $task = $builder->setTitle("Install ".$service->getName())->setPayload([
             'server_id' => $service->getServerId(),

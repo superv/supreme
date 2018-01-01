@@ -2,7 +2,7 @@
 
 use SuperV\Modules\Supreme\Domains\Server\Model\ServerModel;
 use SuperV\Modules\Supreme\Model\Entry\DropEntryModel;
-use SuperV\Platform\Domains\Droplet\Model\DropletModel;
+use SuperV\Platform\Domains\Droplet\Droplet;
 use SuperV\Platform\Domains\Entry\EntryModel;
 
 class DropModel extends DropEntryModel
@@ -34,10 +34,10 @@ class DropModel extends DropEntryModel
 
     public function agent()
     {
-        return $this->hasOne(DropletModel::class, 'id', 'agent_id');
+        return $this->hasOne(Droplet::class, 'id', 'agent_id');
     }
 
-    /** @return DropletModel */
+    /** @return Droplet */
     public function getAgent()
     {
         return $this->agent;

@@ -20,7 +20,7 @@ class Drop
     /** @return Agent */
     public function agent()
     {
-        return app(DropletFactory::class)->create($this->model->getAgent());
+        return new Agent($this->model->getAgent()->toArray());
     }
 
     public function getId()

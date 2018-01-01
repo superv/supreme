@@ -2,13 +2,13 @@
 
 use SuperV\Modules\Supreme\Domains\Server\Model\ServerModel;
 use SuperV\Modules\Supreme\Model\Entry\ServiceEntryModel;
-use SuperV\Platform\Domains\Droplet\Model\DropletModel;
+use SuperV\Platform\Domains\Droplet\Droplet;
 
 class ServiceModel extends ServiceEntryModel
 {
     public function agent()
     {
-        return $this->hasOne(DropletModel::class, 'id', 'agent_id');
+        return $this->hasOne(Droplet::class, 'id', 'agent_id');
     }
     
     public function getName()
@@ -21,7 +21,7 @@ class ServiceModel extends ServiceEntryModel
         return $this->type;
     }
 
-    /** @return DropletModel */
+    /** @return Droplet */
     public function getAgent()
     {
         return $this->agent;
@@ -34,7 +34,7 @@ class ServiceModel extends ServiceEntryModel
 
     public function getAgentOptions()
     {
-        return DropletModel::where('type', 'agent')->get();
+        return Droplet::where('type', 'agent')->get();
     }
 
     public function server()
