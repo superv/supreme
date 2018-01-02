@@ -1,5 +1,6 @@
 <?php
 
+use SuperV\Modules\Nucleo\Domains\Struct\StructFactory;
 use SuperV\Modules\Nucleo\Nucleo;
 use SuperV\Modules\Supreme\Domains\Account\Account;
 use SuperV\Platform\Domains\Database\Migration\Migration;
