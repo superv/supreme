@@ -25,7 +25,7 @@ class CreateSupremeServicesTable extends Migration
 
             $table->foreign('agent_id')
                   ->references('id')
-                  ->on('platform_droplets')
+                  ->on('droplets')
                   ->onDelete('cascade');
 
             $table->foreign('server_id')
