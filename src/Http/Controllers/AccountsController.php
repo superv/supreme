@@ -2,129 +2,90 @@
 
 namespace SuperV\Modules\Supreme\Http\Controllers;
 
+use SuperV\Modules\Nucleo\Domains\Struct\StructTableBuilder;
 use SuperV\Modules\Supreme\Domains\Account\Account;
 use SuperV\Modules\Ui\Domains\Form\FormFactory;
 use SuperV\Modules\Ui\Domains\Form\Jobs\MakeFormInstance;
 use SuperV\Modules\Ui\Domains\Form\Jobs\MapForm;
-use SuperV\Modules\Ui\Domains\Table\TableFactory;
+use SuperV\Modules\Ui\Domains\Page\Page;
 use SuperV\Platform\Http\Controllers\BasePlatformController;
 
 class AccountsController extends BasePlatformController
 {
+    /**
+     * @var Page
+     */
+    protected $page;
+
+    public function __construct(Page $page)
+    {
+        parent::__construct();
+
+        $this->page = $page;
+    }
+
     public function create(FormFactory $factory)
     {
         $form = $factory->fromJson('account.json');
-
         $this->dispatch(new MakeFormInstance($form));
 
-        $data = [
-            'block' => [
-                'component' => 'sv-form',
-                'props'     => [
-                    'fields' => $form->getFields()->values()->toArray(),
-                    'config' => $form->getConfig(),
-                ],
-            ],
-            'page'  => [
-                'title'   => 'Account Create',
-                'buttons' => [
-                    [
-                        'title'      => 'Accounts',
-                        'button'     => 'index',
-                        'type'       => 'sueccess',
-                        'attributes' => [
-                            'href' => '/acp/supreme/accounts/index',
-                        ],
-                    ],
-                ],
-            ],
-        ];
+        $this->page->setTitle('Create Account')
+                   ->setButtons([
+                       'index' => [
+                           'text'  => 'Accounts',
+                           'route' => 'supreme::accounts.index',
+                       ],
+                   ])
+                   ->addBlock($form->toBlock())
+                   ->make();
 
-        if ($this->request->wantsJson()) {
-            return response(['data' => $data]);
-        }
-
-        return $this->view->make('ui::container', ['page' => $data]);
+        return $this->page->render();
     }
 
-    public function edit($id, FormFactory $factory)
+    public function edit(Account $account, FormFactory $factory)
     {
-        $user = Account::find($id);
         $form = $factory->fromJson('account.json');
 
-        $this->dispatch(new MapForm($form, $user));
+        $this->dispatch(new MapForm($form, $account));
         $this->dispatch(new MakeFormInstance($form));
 
-        $data = [
-            'block' => [
-                'component' => 'sv-form',
-                'props'     => [
-                    'fields' => $form->getFields()->values()->toArray(),
-                    'config' => $form->getConfig(),
-                ],
-            ],
-            'page'  => [
-                'title'   => 'Account Edit',
-                'buttons' => [
-                    [
-                        'title'      => 'Accounts',
-                        'button'     => 'index',
-                        'type'       => 'success',
-                        'attributes' => [
-                            'href' => '/acp/supreme/accounts/index',
-                        ],
-                    ],
-                    [
-                        'title'      => 'New Account',
-                        'button'     => 'create',
-                        'type'       => 'success',
-                        'attributes' => [
-                            'href' => '/acp/supreme/accounts/create',
-                        ],
-                    ],
-                ],
-            ],
-        ];
+        $this->page->setTitle('Edit Account')
+                   ->setButtons([
+                       'index'  => [
+                           'text'  => 'Accounts',
+                           'route' => 'supreme::accounts.index',
+                       ],
+                       'create' => [
+                           'text'  => 'New Account',
+                           'route' => 'supreme::accounts.create',
+                       ],
+                   ])
+                   ->addBlock($form->toBlock())
+                   ->make();
 
-        if ($this->request->wantsJson()) {
-            return response(['data' => $data]);
-        }
-
-        return $this->view->make('ui::container', ['page' => $data]);
+        return $this->page->render();
     }
 
-    public function index(TableFactory $factory)
+    public function index(StructTableBuilder $builder)
     {
-        $builder = $factory->fromJson('accounts.json');
-        $table = $builder->build()->getTable();
-
-        $data = [
-            'block' => [
-                'component' => 'sv-table',
-                'props'     => [
-                    'columns' => $table->getColumns(),
-                    'rows'    => $table->getRows(),
-                ],
-            ],
-            'page'  => [
-                'title'   => 'Accounts Index',
-                'buttons' => [
-                    [
-                        'title'      => 'New Account',
-                        'button'     => 'create',
-                        'type'       => 'success',
-                        'attributes' => [
-                            'href' => '/acp/supreme/accounts/create',
-                        ],
+        $builder->setModel(Account::class)
+                ->setButtons([
+                    "edit" => [
+                        "href" => "supreme/servers/{entry.id}/edit",
                     ],
-                ],
-            ],
-        ];
+                ])
+                ->build();
 
-        if ($this->request->wantsJson()) {
-            return response(['data' => $data]);
-        }
+        $this->page->setTitle('Accounts Index')
+                   ->setButtons([
+                       'create' => [
+                           'title' => 'New Account',
+                           'route' => 'supreme::accounts.create',
+                       ],
+                   ])
+                   ->addBlock($builder->getTable()->toBlock())
+                   ->make();
 
-        return $this->view->make('ui::container', ['page' => $data]);
+        return $this->page->render();
     }
 }

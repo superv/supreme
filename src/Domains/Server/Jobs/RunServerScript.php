@@ -1,7 +1,7 @@
 <?php namespace SuperV\Modules\Supreme\Domains\Server\Jobs;
 
 use SuperV\Modules\Supreme\Domains\Script\StubBuilder;
-use SuperV\Modules\Supreme\Domains\Server\Server;
+use SuperV\Modules\Supreme\Domains\Server\Terminal;
 use SuperV\Platform\Domains\Task\Job;
 
 class RunServerScript extends Job
@@ -9,11 +9,11 @@ class RunServerScript extends Job
     protected $script;
 
     /**
-     * @var Server
+     * @var Terminal
      */
     private $server;
 
-    public function __construct(Server $server, $script = null)
+    public function __construct(Terminal $server, $script = null)
     {
         $this->server = $server;
         $this->script = $script;

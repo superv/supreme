@@ -33,7 +33,7 @@ class Remote
         $this->process = $process;
     }
 
-    public function onServer(Server $server)
+    public function onServer(Terminal $server)
     {
         $this->server = $server;
         $this->model = $server->getModel();
