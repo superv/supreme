@@ -71,7 +71,7 @@ class AccountsController extends BasePlatformController
         $builder->setModel(Account::class)
                 ->setButtons([
                     "edit" => [
-                        "href" => "supreme/servers/{entry.id}/edit",
+                        "href" => "supreme/accounts/{entry.id}/edit",
                     ],
                 ])
                 ->build();
